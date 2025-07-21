@@ -1,0 +1,55 @@
+/*
+ * %fv:WSDLException.cpp-5 % 
+ * 
+ * Written by Ming Zhu, March 2006
+ * 
+ * (c) Copyright Compuware Corp 2007
+ * 
+ * WSDL4CPP is a C++ translation of WSDL4J.
+ * WSDL4J is an open source toolkit (See "http://sourceforge.net/projects/wsdl4j")
+ * under the Common Public License Version 1.0
+ */
+#include "wsdl/wsdlxerces.hpp"
+#include <iostream>
+#include "wsdl/WSDLException.hpp"
+
+USING_STD
+
+WSDL_NAMESPACE_BEGIN
+
+const char WSDLException::INVALID_WSDL[] = "INVALID_WSDL";
+const char WSDLException::PARSER_ERROR[] = "PARSER_ERROR";
+const char WSDLException::OTHER_ERROR[] = "OTHER_ERROR";
+const char WSDLException::CONFIGURATION_ERROR[] = "CONFIGURATION_ERROR";
+const char WSDLException::UNBOUND_PREFIX[] = "UNBOUND_PREFIX";
+const char WSDLException::NO_PREFIX_SPECIFIED[] = "NO_PREFIX_SPECIFIED";
+
+WSDLException::WSDLException()
+{
+}
+
+WSDLException::WSDLException(string exCode, string msg)
+	: faultCode (exCode) , message(msg)
+{
+}
+
+WSDLException::WSDLException(const WSDLException &other)
+	: faultCode(other.faultCode), message(other.message)
+{
+}
+
+WSDLException::~WSDLException() throw()
+{
+}
+
+const char* WSDLException::what() const throw() {
+    static std::string gMessage;
+    stringstream ss;
+    ss << "WSDLException: faultCode " << faultCode << ", "
+       << message;
+    gMessage= ss.str();
+    return gMessage.c_str();
+//    return "WSDLException";
+}
+
+WSDL_NAMESPACE_END

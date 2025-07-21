@@ -1,0 +1,72 @@
+Introduction
+============
+
+The Web Services Description Language for C++ Toolkit (WSDL for C++ 
+Toolkit, or simply "WSDL4CPP") allows the parsing, representation, 
+and manipulation of WSDL documents. In the future release, it will
+allow the creation of WSDL documents too. It is a C++-port of WSDL4J 
+toolkit (http://sourceforge.net/projects/wsdl4j).
+
+This toolkit is under the Common Public License (CPL) version 1.0.
+And Compuware Corporation is the major contributor for the first
+release.
+
+The WSDL4J toolkit is also under CPL v1.0 and IBM Copyright 2005 
+(See http://sourceforge.net/projects/wsdl4j for details).
+
+Requirements
+============
+
+WSDL4CPP has the following requirements:
+
+1. Xerces-C++ Version 2.7.0
+   Xerces-C++ is a validating XML parser written in a portable subset of 
+   C++. It is an open source toolkit underthe Apache License, Version 2.0.
+   You can download it from the site:
+              http://xml.apache.org/xerces-c/
+  
+2. Optionally, libcurl 7.16.2 is required.
+   libcurl is a free and easy-to-use client-side URL transfer library, 
+   supporting HTTP, HTTPS and other network transport protocols. 
+   You can download it from the site:
+             http://curl.haxx.se/
+   Remark: this is optional, only required when you want to use libcurl as
+   the HTTP transport layer for URL accessing in WSDL.
+   
+3. Optionally, A special patch of Xerces-C++ Version 2.7.0
+   This patch is specially developped for this toolkit. You can find it
+   in the same package of this WSDL4CPP release.
+   
+   How to use the patch:
+   Copy this patch to your Xerces-C++ 2.7.0 installation directory and 
+   rebuild your Xerces-C++.
+   
+   Remark:
+   1) This patch has some bug-fix and some enhancement in Xerces-C++ 2.7.0;
+   2) This patch enhanced Xerces-C++ 2.7.0 for integration with libcurl.
+   
+  
+How to build on unix platforms
+==============================
+
+Please read the file named "INSTALL".
+
+
+How to build on windows platforms
+=================================
+
+1. Start Microsoft Visual Studio 2005, and open the Microsoft Visual Studio 
+Solution file: "projects\vc2005\wsdl4cpp.sln" 
+
+2. Open the project properties dialog. Change the include and linking library
+   paths of required Xerces-C and libcurl package.
+   
+3. Build wsdl4cpp project for creating the major dll.
+
+4. Build wsdltest project. This will create a sample program for you.
+
+Limitation
+==========
+The feature of creation of WSDL document has not been implemented. See TODO.
+(This feature is included in WSDL4J).
+
