@@ -1,0 +1,126 @@
+/*
+ * $Id: CurlInputStream.hpp $
+ * 
+ * (c) Copyright Compuware Corp 2007
+ * 
+ * Written by Ming Zhu, Jan 2007
+ * 
+ */
+
+#if !defined(CURLINPUTSTREAM_HPP)
+#define CURLINPUTSTREAM_HPP
+
+#ifndef  _MSC_VER
+#undef WIN32
+#undef _WIN32
+#endif
+
+#include <curl/curl.h>
+#include <curl/multi.h>
+#include <curl/easy.h>
+
+#include <xercesc/util/XMLURL.hpp>
+#include <xercesc/util/XMLExceptMsgs.hpp>
+#include <xercesc/util/Janitor.hpp>
+#include <xercesc/util/BinInputStream.hpp>
+#include <xercesc/util/XMLNetAccessor.hpp>
+
+#include "wsdl/wsdlbas.hpp"
+#include "wsdl/InputSourceEnv.hpp"
+
+XERCES_CPP_NAMESPACE_USE
+
+WSDL_NAMESPACE_BEGIN
+
+
+//
+// This class implements the BinInputStream interface specified by the XML
+// parser.
+//
+
+class WSDL_EXPORT CurlInputStream : public XERCES_CPP_NAMESPACE_QUALIFIER BinInputStream
+{
+public :
+    CurlInputStream(const XMLURL&  urlSource
+		, const XMLNetHTTPInfo* httpInfo=0
+		, const InputSourceEnvPtr isePtr = (InputSourceEnvPtr)0 );
+    ~CurlInputStream();
+
+    unsigned int curPos() const;
+    unsigned int readBytes
+    (
+                XMLByte* const  toFill
+        , const unsigned int    maxToRead
+    );
+
+
+private :
+    // -----------------------------------------------------------------------
+    //  Unimplemented constructors and operators
+    // -----------------------------------------------------------------------
+    CurlInputStream(const CurlInputStream&);
+    CurlInputStream& operator=(const CurlInputStream&);
+    
+    static size_t staticWriteCallback(char *buffer,
+                                      size_t size,
+                                      size_t nitems,
+                                      void *outstream);
+    size_t writeCallback(			  char *buffer,
+                                      size_t size,
+                                      size_t nitems);
+
+
+    // -----------------------------------------------------------------------
+    //  Private data members
+    //
+    //  fSocket
+    //      The socket representing the connection to the remote file.
+    //  fBytesProcessed
+    //      Its a rolling count of the number of bytes processed off this
+    //      input stream.
+    //  fBuffer
+    //      Holds the http header, plus the first part of the actual
+    //      data.  Filled at the time the stream is opened, data goes
+    //      out to user in response to readBytes().
+    //  fBufferPos, fBufferEnd
+    //      Pointers into fBuffer, showing start and end+1 of content
+    //      that readBytes must return.
+    // -----------------------------------------------------------------------
+	
+    CURLM*				fMulti;
+    CURL*				fEasy;
+    
+    MemoryManager*      fMemoryManager;
+    
+    XMLURL				fURLSource;
+    ArrayJanitor<char>	fURL;
+    
+    unsigned long       fTotalBytesRead;
+    XMLByte*			fWritePtr;
+    unsigned long		fBytesRead;
+    unsigned long		fBytesToRead;
+    bool				fDataAvailable;
+    
+    // Overflow buffer for when curl writes more data to us
+    // than we've asked for.
+    XMLByte				fBuffer[CURL_MAX_WRITE_SIZE];
+    XMLByte*			fBufferHeadPtr;
+    XMLByte*			fBufferTailPtr;
+    
+    char*			mErrorBuf[CURL_ERROR_SIZE];
+
+	std::string fUserPasswordBuffer;
+    
+}; // CurlInputStream
+
+
+inline unsigned int
+CurlInputStream::curPos() const
+{
+    return fTotalBytesRead;
+}
+
+WSDL_NAMESPACE_END
+
+#endif // CURLINPUTSTREAM_HPP
+

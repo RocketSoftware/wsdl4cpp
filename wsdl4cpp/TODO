@@ -1,0 +1,6 @@
+The Issues To Do
+================
+
+1. Implementation of the WSDL document creation part.
+   In detail, the WsdlWriter class.
+   
