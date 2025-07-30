@@ -3,11 +3,6 @@
  * 
  */
 
-/*
- * $Id:$
- */
-
-
 #ifndef INPUTSOURCEBUILDER_HPP
 #define INPUTSOURCEBUILDER_HPP
 

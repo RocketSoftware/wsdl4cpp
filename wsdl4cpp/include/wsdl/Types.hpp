@@ -1,13 +1,11 @@
 /*
- * %fv:Types.hpp-5 % 
+ * Written by Ming Zhu, March 2006
  * 
- * Written by Ming Zhu (ming.zhu@nl.compuware.com), March 2006
+ * (c) 2025 Rocket Software, Inc. or its affiliates
  * 
- * (c) Copyright Compuware Corp 2007
- * 
- * WSDL4CPP is a C++ translation of WSDL4J.
- * WSDL4J is an open source toolkit (See "http://sourceforge.net/projects/wsdl4j")
- * under the Common Public License Version 1.0
+ * WSDL4CPP is under the Eclipse Public License version 2.0 (EPL2.0).
+ * It is a C++ translation of WSDL4J (an open source toolkit, see
+ * "http://sourceforge.net/projects/wsdl4j").
  * 
  * History:
  * 
@@ -43,7 +41,7 @@ DEFINE_PTR(Types);
  * 
  * @author  Matthew J. Duftler (duftler@us.ibm.com, for original java 
  *                              implementation)
- * @author  Ming Zhu (ming.zhu@nl.compuware.com, for C++ migration) 
+ * @author  Ming Zhu (for C++ migration) 
  */
 class WSDL_EXPORT Types : 
     public Documented 

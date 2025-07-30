@@ -1,6 +1,4 @@
 /*
- * %fv:Schema.cpp-4 % 
- * 
  * Written by Ming Zhu, March 2006
  * 
  * 

@@ -1,6 +1,4 @@
 /*
- * %fv:SchemaXercesc.hpp-2 % 
- * 
  * Written by Ming Zhu, March 2006
  * 
  * This part is an extension to WSDL4J.

@@ -1,6 +1,4 @@
 /*
- * %fv:wsdlbas.hpp-6 % 
- * 
  * Written by Ming Zhu, March 2006
  * 
  */
@@ -48,9 +46,9 @@
 
 #define USING_STD using namespace std;
 
-WSDL_NAMESPACE_BEGIN
+#define DEFINE_PTR(__class__) typedef WSDL_NAMESPACE_QUALIFIER counted_ptr<__class__> __class__##Ptr
 
-#define DEFINE_PTR(__class__) typedef counted_ptr<__class__> __class__##Ptr
+WSDL_NAMESPACE_BEGIN
 
 /* For ANSI-challenged compilers, you may want to #define
  * NO_MEMBER_TEMPLATES or explicit */

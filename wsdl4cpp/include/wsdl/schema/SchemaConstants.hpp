@@ -1,13 +1,11 @@
 /*
- * %fv:SchemaConstants.hpp-3 % 
- * 
  * Written by Ming Zhu, March 2006
  * 
- * (c) Copyright Compuware Corp 2007
+ * (c) 2025 Rocket Software, Inc. or its affiliates
  * 
- * WSDL4CPP is a C++ translation of WSDL4J.
- * WSDL4J is an open source toolkit (See "http://sourceforge.net/projects/wsdl4j")
- * under the Common Public License Version 1.0
+ * WSDL4CPP is under the Eclipse Public License version 2.0 (EPL2.0).
+ * It is a C++ translation of WSDL4J (an open source toolkit, see
+ * "http://sourceforge.net/projects/wsdl4j").
  */
 #ifndef SCHEMACONSTANTS_HPP_
 #define SCHEMACONSTANTS_HPP_
@@ -21,7 +19,7 @@ WSDL_NAMESPACE_BEGIN
 /**
  * Constants used for handling XML Schemas
  * 
- * @author Ming Zhu <ming.zhu@compuware.com>
+ * @author Ming Zhu
  */
 class WSDL_EXPORT SchemaConstants 
 {

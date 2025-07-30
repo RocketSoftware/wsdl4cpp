@@ -1,10 +1,7 @@
 /*
- * $Id: CurlInputSourceBuilder.hpp $
- * 
- * (c) Copyright Compuware Corp 2007
+ * (c) 2025 Rocket Software, Inc. or its affiliates
  * 
  * Written by Ming Zhu, Jan 2007
- * 
  */
 
 #ifndef CURLINPUTSOURCEBUILDER_HPP
