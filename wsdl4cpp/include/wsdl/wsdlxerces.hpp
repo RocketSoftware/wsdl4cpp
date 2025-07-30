@@ -30,8 +30,6 @@
 #include <xercesc/util/XMLString.hpp>
 #include "wsdl/wsdlbas.hpp"
 
-//XERCES_CPP_NAMESPACE_USE
-
 WSDL_NAMESPACE_BEGIN
 
 #define XMLCHPTR(s) (XERCES_CPP_NAMESPACE_QUALIFIER XMLString::transcode(s))
@@ -186,7 +184,7 @@ private:
     
 };
 
-#define null XMLChString::getNull()
+#define null wsdl::XMLChString::getNull()
 //static const XMLChString null;
 
 bool inline operator==(

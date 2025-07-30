@@ -60,7 +60,8 @@ void SchemaModel::setGrammarPool(XMLGrammarPoolPtr grammarPool)
     mGrammarPool = grammarPool;
     if ( mGrammarPool )
     {
-        XSModelPtr model(mGrammarPool->getXSModel(), mGrammarPool);
+		bool XSModelWasChanged = true;
+        XSModelPtr model(mGrammarPool->getXSModel(XSModelWasChanged), mGrammarPool);
         mModel = model;
         if ( mModel )
         {

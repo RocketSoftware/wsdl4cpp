@@ -1,0 +1,366 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\wsdl">
+      <UniqueIdentifier>{3cb64f43-b1a5-44a3-8088-9e84e126eace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\wsdl\ext">
+      <UniqueIdentifier>{ca699b01-5a23-44d8-a6d0-ad6263bd631d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\wsdl\soap">
+      <UniqueIdentifier>{bc2b7213-600c-4495-b526-660c27802728}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\wsdl\schema">
+      <UniqueIdentifier>{f8ed4ee6-9143-4705-9220-36b2ae41ee3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\xcurl">
+      <UniqueIdentifier>{f50886b2-971e-480d-b8d2-9fc0f0762679}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\wsdl">
+      <UniqueIdentifier>{a73ceb93-e755-4c95-9b8a-ef27bc25393e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\wsdl\soap">
+      <UniqueIdentifier>{3f415ff2-7166-49e7-bf28-f0b7c73cd762}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\wsdl\schema">
+      <UniqueIdentifier>{3c0dbb3b-96d9-40c9-92f0-dcec3be086db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\wsdl\ext\AttributeExtensible.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\BindingFault.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\BindingInput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\BindingOperation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\BindingOutput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\Constants.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\xcurl\CurlInputSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\xcurl\CurlInputSourceBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\Definitions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\util\DOMUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\ext\ElementExtensible.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\ext\ExtensibilityAttribute.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\ext\ExtensibilityElement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\ext\ExtensionRegistry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\Fault.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\Import.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\Message.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\NamedElement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\Operation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\OperationType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\Output.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\Param.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\Part.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\Port.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\PortType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\QName.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\Service.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\util\StringUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\Types.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\ext\UnknownExtensibilityElement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\ext\UnknownExtensionDeserializer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\WsdlErrorHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\WSDLException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\WsdlFramework.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\WsdlReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\wsdlxerces.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\util\XercesUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\xcurl\CurlInputStream.cpp">
+      <Filter>Source Files\wsdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\Binding.cpp">
+      <Filter>Source Files\wsdl\soap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\soap\SOAPAddressSerializer.cpp">
+      <Filter>Source Files\wsdl\soap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\soap\SOAPBindingSerializer.cpp">
+      <Filter>Source Files\wsdl\soap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\soap\SOAPBodySerializer.cpp">
+      <Filter>Source Files\wsdl\soap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\soap\SOAPConstants.cpp">
+      <Filter>Source Files\wsdl\soap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\soap\SOAPElement.cpp">
+      <Filter>Source Files\wsdl\soap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\util\SOAPEncodingUtils.cpp">
+      <Filter>Source Files\wsdl\soap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\soap\SOAPFaultSerializer.cpp">
+      <Filter>Source Files\wsdl\soap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\soap\SOAPHeaderSerializer.cpp">
+      <Filter>Source Files\wsdl\soap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\soap\SOAPOperationSerializer.cpp">
+      <Filter>Source Files\wsdl\soap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\soap\SOAPSerializerUtils.cpp">
+      <Filter>Source Files\wsdl\soap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\schema\Schema.cpp">
+      <Filter>Source Files\wsdl\schema</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\schema\SchemaConstants.cpp">
+      <Filter>Source Files\wsdl\schema</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\schema\SchemaDeserializer.cpp">
+      <Filter>Source Files\wsdl\schema</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wsdl\schema\SchemaModel.cpp">
+      <Filter>Source Files\wsdl\schema</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\wsdl\Binding.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\BindingFault.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\BindingInput.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\BindingOperation.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\BindingOutput.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\Constants.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\Definitions.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\Documented.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\DomFramework.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\Fault.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\Import.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\Input.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\InputSourceEnv.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\Message.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\NamedElement.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\Operation.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\OperationType.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\Output.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\Param.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\Part.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\Port.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\PortType.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\QName.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\Service.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\Types.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\wsdlbas.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\WsdlErrorHandler.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\WSDLException.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\WsdlReader.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\wsdlxerces.hpp">
+      <Filter>Header Files\wsdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPAddress.hpp">
+      <Filter>Header Files\wsdl\soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPAddressSerializer.hpp">
+      <Filter>Header Files\wsdl\soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPBinding.hpp">
+      <Filter>Header Files\wsdl\soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPBindingSerializer.hpp">
+      <Filter>Header Files\wsdl\soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPBody.hpp">
+      <Filter>Header Files\wsdl\soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPBodyBasic.hpp">
+      <Filter>Header Files\wsdl\soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPBodySerializer.hpp">
+      <Filter>Header Files\wsdl\soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPConstants.hpp">
+      <Filter>Header Files\wsdl\soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPElement.hpp">
+      <Filter>Header Files\wsdl\soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPFault.hpp">
+      <Filter>Header Files\wsdl\soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPFaultSerializer.hpp">
+      <Filter>Header Files\wsdl\soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPHeader.hpp">
+      <Filter>Header Files\wsdl\soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPHeaderBasic.hpp">
+      <Filter>Header Files\wsdl\soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPHeaderFault.hpp">
+      <Filter>Header Files\wsdl\soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPHeaderSerializer.hpp">
+      <Filter>Header Files\wsdl\soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPOperation.hpp">
+      <Filter>Header Files\wsdl\soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPOperationSerializer.hpp">
+      <Filter>Header Files\wsdl\soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPSerializerUtils.hpp">
+      <Filter>Header Files\wsdl\soap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\schema\Schema.hpp">
+      <Filter>Header Files\wsdl\schema</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\schema\SchemaConstants.hpp">
+      <Filter>Header Files\wsdl\schema</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\schema\SchemaDeserializer.hpp">
+      <Filter>Header Files\wsdl\schema</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\schema\SchemaModel.hpp">
+      <Filter>Header Files\wsdl\schema</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\wsdl\schema\SchemaXercesc.hpp">
+      <Filter>Header Files\wsdl\schema</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

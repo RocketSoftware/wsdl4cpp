@@ -1,5 +1,5 @@
 /*
- * %fv:XercesUtils.hpp-8 % 
+ * %fv:XercesUtils.hpp-1 % %dc:Thu Dec 10 11:59:15 2009 %
  * 
  * Written by Ming Zhu, March 2006
  * 
@@ -15,10 +15,16 @@
  * --------------------------------------------------------------------------
  * revision  date    refnum    version  who  description
  */
+/*******************************************************************************
+date   refnum    version who description
+120907 b29663    E110    ahn better error reporting
+date   refnum    version who description
+*******************************************************************************/
+
 #ifndef XERCESUTILS_HPP_
 #define XERCESUTILS_HPP_
 #include <xercesc/util/XercesDefs.hpp>
-#include <xercesc/dom/DOMBuilder.hpp>
+#include <xercesc/dom/DOMLSParser.hpp>
 #include <xercesc/dom/DOMElement.hpp>
 #include <xercesc/framework/XMLValidator.hpp>
 #include <xercesc/framework/XMLGrammarPool.hpp>
@@ -26,6 +32,7 @@
 #include <xercesc/internal/SGXMLScanner.hpp>
 #include <xercesc/validators/schema/TraverseSchema.hpp>
 #include <xercesc/sax/InputSource.hpp>
+#include <xercesc/parsers/XercesDOMParser.hpp>
 
 #include "wsdl/wsdlbas.hpp"
 #include "wsdl/wsdlxerces.hpp"
@@ -50,8 +57,13 @@ public:
 	static XERCES_CPP_NAMESPACE_QUALIFIER DOMElement* getFirstChildElement (
             XERCES_CPP_NAMESPACE_QUALIFIER DOMElement* elem);
     
-    static XERCES_CPP_NAMESPACE_QUALIFIER DOMBuilder* 
-        createDOMBuilder (XERCES_CPP_NAMESPACE_QUALIFIER XMLGrammarPool* const gramPool);
+    static XERCES_CPP_NAMESPACE_QUALIFIER DOMLSParser* 
+        createLSParser (XERCES_CPP_NAMESPACE_QUALIFIER XMLGrammarPool* const gramPool);
+    
+    static XERCES_CPP_NAMESPACE_QUALIFIER XSModel* 
+        createSchemaModel (const XMLCh* systemId, XERCES_CPP_NAMESPACE_QUALIFIER DOMElement* elem);
+    //static XERCES_CPP_NAMESPACE_QUALIFIER XSModel* 
+    //    createSchemaModel2 (const XMLCh* systemId, XERCES_CPP_NAMESPACE_QUALIFIER DOMElement* elem);
     
     // @rev03
     static XERCES_CPP_NAMESPACE_QUALIFIER InputSource* createInputSource(
@@ -76,7 +88,15 @@ public :
     
     void scanExtElementList(ExtensibilityElement::ListPtr extElements);
           
+    XERCES_CPP_NAMESPACE_QUALIFIER Grammar* loadGrammar(
+        const XMLCh* systemId, 
+        XERCES_CPP_NAMESPACE_QUALIFIER DOMElement* schemaElement, 
+        bool toCache);
+        
     //@rev02 begin
+    XERCES_CPP_NAMESPACE_QUALIFIER Grammar*  afterLoadGrammar(
+        XERCES_CPP_NAMESPACE_QUALIFIER  Grammar* grammar, bool toCache);
+    
     XERCES_CPP_NAMESPACE_QUALIFIER TraverseSchema* getTraverseSchema();
     XERCES_CPP_NAMESPACE_QUALIFIER TraverseSchema* traverseSchema;
     //@rev02 end
@@ -109,16 +129,35 @@ protected:
 	InputSourceEnvPtr isePtr;
 	bool usingCURL;
 
-    XERCES_CPP_NAMESPACE_QUALIFIER Grammar* loadGrammar(
-        const XMLCh* systemId, 
-        XERCES_CPP_NAMESPACE_QUALIFIER DOMElement* schemaElement, 
-        bool toCache);
-        
-    XERCES_CPP_NAMESPACE_QUALIFIER Grammar*  afterLoadGrammar(
-        XERCES_CPP_NAMESPACE_QUALIFIER  Grammar* grammar, bool toCache);
-    
     void traverseExtElementList(ExtensibilityElement::ListPtr extElements);
 };
+
+// @b29663
+/**
+ * An extension of XercesDOMParser which ensure that the DOM tree is made of
+ * XSDElementNSImpl nodes instead of DOMElementNSImpl. The only difference is that
+ * they contain the line and column numbers from the origonal document. This allows
+ * better error reporting. This already happen when we are parsing an imported XSD
+ * where the XSDDOMParser is used.
+ */
+class WSDL_EXPORT WsdlDOMParser : public XERCES_CPP_NAMESPACE_QUALIFIER XercesDOMParser
+{
+public:
+    WsdlDOMParser
+    (
+        XERCES_CPP_NAMESPACE::XMLValidator* const   valToAdopt = 0
+        , XERCES_CPP_NAMESPACE::MemoryManager* const  manager = XERCES_CPP_NAMESPACE::XMLPlatformUtils::fgMemoryManager
+        , XERCES_CPP_NAMESPACE::XMLGrammarPool* const gramPool = 0
+    );
+
+    ~WsdlDOMParser();
+
+protected:
+	virtual XERCES_CPP_NAMESPACE::DOMElement* createElementNS(
+		const XMLCh *namespaceURI, const XMLCh *elemPrefix, const XMLCh *localName, const XMLCh *qName);
+
+};
+
 
 WSDL_NAMESPACE_END
 

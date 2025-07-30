@@ -46,13 +46,14 @@ public :
 		, const InputSourceEnvPtr isePtr = (InputSourceEnvPtr)0 );
     ~CurlInputStream();
 
-    unsigned int curPos() const;
-    unsigned int readBytes
+    XMLFilePos curPos() const;
+    XMLSize_t readBytes
     (
                 XMLByte* const  toFill
-        , const unsigned int    maxToRead
+        , const XMLSize_t    maxToRead
     );
 
+	const XMLCh* getContentType() const;
 
 private :
     // -----------------------------------------------------------------------
@@ -107,17 +108,22 @@ private :
     XMLByte*			fBufferHeadPtr;
     XMLByte*			fBufferTailPtr;
     
-    char*			mErrorBuf[CURL_ERROR_SIZE];
+    char*			    fErrorBuf;
 
 	std::string fUserPasswordBuffer;
     
 }; // CurlInputStream
 
 
-inline unsigned int
+inline XMLFilePos
 CurlInputStream::curPos() const
 {
     return fTotalBytesRead;
+}
+inline const XMLCh*
+CurlInputStream::getContentType() const 
+{
+	return 0;
 }
 
 WSDL_NAMESPACE_END

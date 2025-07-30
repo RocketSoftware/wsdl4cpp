@@ -17,6 +17,7 @@ USING_STD
 
 WSDL_NAMESPACE_BEGIN
 
+const char WSDLException::ACCESS_ERROR[] = "ACCESS_ERROR";
 const char WSDLException::INVALID_WSDL[] = "INVALID_WSDL";
 const char WSDLException::PARSER_ERROR[] = "PARSER_ERROR";
 const char WSDLException::OTHER_ERROR[] = "OTHER_ERROR";
