@@ -10,8 +10,8 @@ Xerces-C++ Version 3.2.5
 -------------------
 1. Download Xerces-C++ Version 3.2.5 from https://xerces.apache.org/xerces-c/;
 2. Unzip it to some directory;
-3. Copy the "src" subdirectory of Xerces-C++ to the "src" subdirectory 
-   in xercesc directory here;
+3. Copy the "src" subdirectory here to overwrite the "src" subdirectory 
+   in the Xerces-C++ directory;
 4. Rebuild Xerces-C++.
 
 -------------------
