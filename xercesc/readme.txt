@@ -1,25 +1,32 @@
----------------------------------------------------------------
- %fv:readme.txt-3 % %dc:Tue Feb 13 11:22:12 2007 %
----------------------------------------------------------------
-
+Xerces-C++ Extension 3.2.5 for WSDL4CPP
+=======================================
 
 The original source files are from apache package:
 
-Xerces-C++ Version 2.7.0
+Xerces-C++ Version 3.2.5
 
 -------------------
  How to build
 -------------------
-1. Download Xerces-C++ Version 2.7.0 from http://xml.apache.org/xerces-c/;
+1. Download Xerces-C++ Version 3.2.5 from https://xerces.apache.org/xerces-c/;
 2. Unzip it to some directory;
-3. Copy the "src" subdirectory here to the "src" subdirectory
-   in Xerces-C directory;
-4. Rebuild Xerces-C.
+3. Copy the "src" subdirectory of Xerces-C++ to the "src" subdirectory 
+   in xercesc directory here;
+4. Rebuild Xerces-C++.
 
 -------------------
  History of change
 -------------------
-20070213:
+20240725 (for WSDL4CPP release 10.4.03.000)
+New files:
+  xercesc\util\XMLExceptMsgs.hpp
+
+Modification:
+  xercesc\validators\schema\TraverseSchema.hpp
+  xercesc\validators\schema\TraverseSchema.cpp
+
+
+20070213 (for WSDL4CPP beta release 0.9.2b)
 New files for introducing InputSourceBuilder:
   xercesc\util\ISBuilder\InputSourceBuilder.hpp
   xercesc\util\ISBuilder\InputSourceBuilder.cpp
