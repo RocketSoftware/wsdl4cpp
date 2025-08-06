@@ -18,12 +18,24 @@ Xerces-C++ Version 3.2.5
  History of change
 -------------------
 20240725 (for WSDL4CPP release 10.4.03.000)
+What's new?
+  - Xerces C++ update from 2.7.0 to 3.2.5;
+  - Improved exception messages.
+    
 New files:
-  xercesc\util\XMLExceptMsgs.hpp
+  xercesc/src/CMakeLists.txt
+  xercesc/src/xercesc/util/XMLExceptMsgs.hpp
 
 Modification:
-  xercesc\validators\schema\TraverseSchema.hpp
-  xercesc\validators\schema\TraverseSchema.cpp
+  xercesc/readme.txt
+  xercesc/src/xercesc/validators/schema/TraverseSchema.hpp
+  xercesc/src/xercesc/validators/schema/TraverseSchema.cpp
+  
+Deleted:
+  xercesc/Projects/Win32/VC7.1/xerces_all/XercesLib/XercesLib.vcproj
+  xercesc/scripts/packageBinaries.pl
+  xercesc/src/configure.in
+
 
 
 20070213 (for WSDL4CPP beta release 0.9.2b)
