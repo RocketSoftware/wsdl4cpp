@@ -28,6 +28,7 @@ DEFINE_PTR(WSDLException);
 class WSDL_EXPORT WSDLException : public std::exception
 {
 public:
+    static const char ACCESS_ERROR[];
     static const char INVALID_WSDL[];
     static const char PARSER_ERROR[];
     static const char OTHER_ERROR[];

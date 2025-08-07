@@ -8,8 +8,8 @@ allow the creation of WSDL documents too. It is a C++-port of WSDL4J
 toolkit (http://sourceforge.net/projects/wsdl4j).
 
 This toolkit is under the Common Public License (CPL) version 1.0.
-And Compuware Corporation is the major contributor for the first
-release.
+Compuware Corporation is the major contributor for the first
+release, and Rocket Software is the major contributor for the later releases.
 
 The WSDL4J toolkit is also under CPL v1.0 and IBM Copyright 2005 
 (See http://sourceforge.net/projects/wsdl4j for details).
@@ -19,13 +19,13 @@ Requirements
 
 WSDL4CPP has the following requirements:
 
-1. Xerces-C++ Version 2.7.0
+1. Xerces-C++ Version 3.2.5
    Xerces-C++ is a validating XML parser written in a portable subset of 
-   C++. It is an open source toolkit underthe Apache License, Version 2.0.
+   C++. It is an open source toolkit under the Apache License, Version 2.0.
    You can download it from the site:
               http://xml.apache.org/xerces-c/
   
-2. Optionally, libcurl 7.16.2 is required.
+2. Optionally, libcurl 8.4.0 is required.
    libcurl is a free and easy-to-use client-side URL transfer library, 
    supporting HTTP, HTTPS and other network transport protocols. 
    You can download it from the site:
@@ -33,17 +33,17 @@ WSDL4CPP has the following requirements:
    Remark: this is optional, only required when you want to use libcurl as
    the HTTP transport layer for URL accessing in WSDL.
    
-3. Optionally, A special patch of Xerces-C++ Version 2.7.0
-   This patch is specially developped for this toolkit. You can find it
+3. Optionally, A special patch of Xerces-C++ Version 3.2.5
+   This patch is specially developed for this toolkit. You can find it
    in the same package of this WSDL4CPP release.
    
    How to use the patch:
-   Copy this patch to your Xerces-C++ 2.7.0 installation directory and 
+   Copy this patch to your Xerces-C++ 3.2.5 installation directory and 
    rebuild your Xerces-C++.
    
    Remark:
-   1) This patch has some bug-fix and some enhancement in Xerces-C++ 2.7.0;
-   2) This patch enhanced Xerces-C++ 2.7.0 for integration with libcurl.
+   1) This patch has some bug-fix and some enhancement in Xerces-C++ 3.2.5;
+   2) This patch enhanced Xerces-C++ 3.2.5 for integration with libcurl.
    
   
 How to build on unix platforms

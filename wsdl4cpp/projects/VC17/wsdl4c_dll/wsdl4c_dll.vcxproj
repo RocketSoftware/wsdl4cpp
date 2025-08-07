@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B240553F-DE69-4B5C-8998-A4A63EBA5234}</ProjectGuid>
+    <RootNamespace>wsdl4c_dll</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.25431.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\..\..\..\..\output\w2k\debug\</OutDir>
+    <IntDir>..\..\..\..\..\intermediate\w2k\debug\wsdl4cpp\obj\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <TargetName>wsdl4cD</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\..\..\..\output\w2k\release\</OutDir>
+    <IntDir>..\..\..\..\..\intermediate\w2k\release\wsdl4cpp\obj\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <TargetName>wsdl4c</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>..\..\..\..\..\output\wa1\debug\</OutDir>
+    <IntDir>..\..\..\..\..\intermediate\wa1\debug\wsdl4cpp\obj\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <TargetName>wsdl4cD</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\..\..\..\..\output\wa1\release\</OutDir>
+    <IntDir>..\..\..\..\..\intermediate\wa1\release\wsdl4cpp\obj\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <TargetName>wsdl4c</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include;$(ProjectDir)..\..\..\..\..\output\w2k\debug\include;..\..\..\..\..\curl\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;PROJ_WSDL_DLL;WSDL_USE_CURL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader />
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;xerces-c_3_2D.lib;libucurl-d_imp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)bin\wsdl4cD.dll</OutputFile>
+      <AdditionalLibraryDirectories>$(OutDir)lib;(OutDir)bin;../../../../../curl/src/build/$(Platform)\VC14\DLL $(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)bin\$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <ImportLibrary>$(OutDir)lib\$(TargetName).lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /e/y ..\..\..\xsd\*.*  $(OutDir)..\..\xsd\*.*</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include;$(ProjectDir)..\..\..\..\..\output\w2k\release\include;..\..\..\..\..\curl\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;PROJ_WSDL_DLL;WSDL_USE_CURL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;xerces-c_3_2.lib;libucurl_imp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)bin\wsdl4c.dll</OutputFile>
+      <AdditionalLibraryDirectories>$(OutDir)lib;(OutDir)bin;../../../../../curl/src/build/$(Platform)\VC14\DLL $(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)bin\$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences />
+      <EnableCOMDATFolding />
+      <LinkTimeCodeGeneration />
+      <ImportLibrary>$(OutDir)lib\$(TargetName).lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /e/y ..\..\..\xsd\*.*  $(OutDir)..\..\..\xsd\*.*</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\include;$(OutDir)\include;..\..\..\..\..\curl\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;WIN64;_DEBUG;_WINDOWS;PROJ_WSDL_DLL;WSDL_USE_CURL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader />
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;xerces-c_3_2D.lib;libucurl-d_imp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)bin\wsdl4cD.dll</OutputFile>
+      <AdditionalLibraryDirectories>$(OutDir)lib;../../../../../curl/src/build/Win64\VC14\DLL $(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)bin\$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <ImportLibrary>$(OutDir)lib\$(TargetName).lib</ImportLibrary>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /e/y ..\..\..\xsd\*.*  $(OutDir)..\..\xsd\*.*</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include;$(OutDir)\include;..\..\..\..\..\curl\src\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;WIN64;NDEBUG;_WINDOWS;_USRDLL;PROJ_WSDL_DLL;WSDL_USE_CURL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader />
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;xerces-c_3_2.lib;libucurl_imp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)bin\wsdl4c.dll</OutputFile>
+      <AdditionalLibraryDirectories>$(OutDir)lib;../../../../../curl/src/build/Win64\VC14\DLL $(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)bin\$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences />
+      <EnableCOMDATFolding />
+      <LinkTimeCodeGeneration />
+      <ImportLibrary>$(OutDir)lib\$(TargetName).lib</ImportLibrary>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /e/y ..\..\..\xsd\*.*  $(OutDir)..\..\..\xsd\*.*</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\wsdl\Binding.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\BindingFault.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\BindingInput.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\BindingOperation.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\BindingOutput.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\Constants.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\Definitions.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\ext\AttributeExtensible.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\ext\ElementExtensible.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\ext\ExtensibilityAttribute.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\ext\ExtensibilityElement.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\ext\ExtensionRegistry.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\ext\UnknownExtensibilityElement.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\ext\UnknownExtensionDeserializer.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\Fault.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\Import.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\Input.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\Message.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\NamedElement.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\Operation.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\OperationType.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\Output.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\Param.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\Part.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\Port.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\PortType.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\QName.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\schema\Schema.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\schema\SchemaConstants.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\schema\SchemaDeserializer.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\schema\SchemaModel.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\Service.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\soap\SOAPAddressSerializer.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\soap\SOAPBindingSerializer.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\soap\SOAPBodySerializer.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\soap\SOAPConstants.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\soap\SOAPElement.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\soap\SOAPFaultSerializer.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\soap\SOAPHeaderSerializer.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\soap\SOAPOperationSerializer.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\soap\SOAPSerializerUtils.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\Types.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\util\DOMUtils.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\util\SOAPEncodingUtils.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\util\StringUtils.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\util\XercesUtils.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\WsdlErrorHandler.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\WSDLException.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\WsdlFramework.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\WsdlReader.cpp" />
+    <ClCompile Include="..\..\..\src\wsdl\wsdlxerces.cpp" />
+    <ClCompile Include="..\..\..\src\xcurl\CurlInputSource.cpp" />
+    <ClCompile Include="..\..\..\src\xcurl\CurlInputSourceBuilder.cpp" />
+    <ClCompile Include="..\..\..\src\xcurl\CurlInputStream.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\wsdl\Binding.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\BindingFault.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\BindingInput.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\BindingOperation.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\BindingOutput.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\Constants.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\Definitions.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\Documented.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\DomFramework.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\Fault.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\Import.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\Input.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\InputSourceEnv.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\Message.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\NamedElement.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\Operation.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\OperationType.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\Output.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\Param.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\Part.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\Port.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\PortType.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\QName.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\schema\Schema.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\schema\SchemaConstants.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\schema\SchemaDeserializer.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\schema\SchemaModel.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\schema\SchemaXercesc.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\Service.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPAddress.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPAddressSerializer.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPBinding.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPBindingSerializer.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPBody.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPBodyBasic.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPBodySerializer.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPConstants.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPElement.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPFault.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPFaultSerializer.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPHeader.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPHeaderBasic.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPHeaderFault.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPHeaderSerializer.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPOperation.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPOperationSerializer.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\soap\SOAPSerializerUtils.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\Types.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\wsdlbas.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\WsdlErrorHandler.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\WSDLException.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\WsdlReader.hpp" />
+    <ClInclude Include="..\..\..\include\wsdl\wsdlxerces.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

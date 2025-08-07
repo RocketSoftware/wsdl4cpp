@@ -12,7 +12,7 @@
 #ifndef SOAPENCODINGUTILS_HPP_
 #define SOAPENCODINGUTILS_HPP_
 #include <xercesc/util/XercesDefs.hpp>
-#include <xercesc/dom/DOMBuilder.hpp>
+//#include <xercesc/dom/DOMBuilder.hpp>
 #include <xercesc/dom/DOMElement.hpp>
 
 #include "wsdl/wsdlbas.hpp"

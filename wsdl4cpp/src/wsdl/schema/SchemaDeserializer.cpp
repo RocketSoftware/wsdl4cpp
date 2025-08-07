@@ -17,6 +17,7 @@
 /*******************************************************************************
 date   refnum    version who description
 070202 c25507    9.SOAP  ahn direct import of soapencoding.xsd
+150724 b30601    X702    ahn ns prefix scoping
 date   refnum    version who description
 *******************************************************************************/
 #include "wsdl/wsdlxerces.hpp"
@@ -24,7 +25,7 @@ date   refnum    version who description
 #include <iostream>
 #include <xercesc/dom/DOMDocument.hpp>
 #include <xercesc/dom/DOMNamedNodeMap.hpp>
-#include <xercesc/internal/XMLGrammarPoolImpl.hpp>
+#include <xercesc/framework/XMLGrammarPoolImpl.hpp>
 #include <xercesc/util/XMLUniDefs.hpp>
 #include <xercesc/util/OutOfMemoryException.hpp>
 #include "wsdl/wsdlxerces.hpp"
@@ -96,7 +97,8 @@ void SchemaDeserializer::normalizeSchemaInWsdl(
     for (int i=0, l=aMap->getLength(); i<l; i++) {
         DOMNode* node = aMap->item(i);
 		if ( XMLString::compareString(DOMUtils::ATTR_XMLNS, node->getPrefix()) == 0 ){
-            saMap->setNamedItemNS(node->cloneNode(false));
+            if (!saMap->getNamedItemNS(node->getNamespaceURI(), node->getLocalName())) // @b30601
+                saMap->setNamedItemNS(node->cloneNode(false));
         }
     }
     

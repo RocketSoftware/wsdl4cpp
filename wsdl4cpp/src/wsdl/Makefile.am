@@ -4,8 +4,9 @@ METASOURCES = AUTO
 lib_LTLIBRARIES = libwsdl4cpp.la
 libwsdl4cpp_la_LDFLAGS= -avoid-version
 
+libwsdl4cpp_la_LIBADD =  -L$(XERCESC_HOME)/lib -L$(CURL_HOME)/lib -L$(OPENSSL_HOME)/lib
 
-WSDL_SRC = Binding.cpp BindingFault.cpp BindingInput.cpp\
+libwsdl4cpp_la_SOURCES = Binding.cpp BindingFault.cpp BindingInput.cpp\
 	BindingOperation.cpp BindingOutput.cpp Constants.cpp Definitions.cpp\
 	WsdlFramework.cpp Fault.cpp Import.cpp Input.cpp\
 	Message.cpp NamedElement.cpp Operation.cpp OperationType.cpp Output.cpp\
@@ -30,13 +31,15 @@ XCURL_SRC = ../xcurl/CurlInputSource.cpp ../xcurl/CurlInputSourceBuilder.cpp \
         ../xcurl/CurlInputStream.cpp
         
 if XCURL
+
 AM_CPPFLAGS=-DWSDL_USE_CURL
 
-libwsdl4cpp_la_LIBADD =  -L$(XERCESC_HOME)/lib -L$(CURL_HOME)/lib -lxercesc2_70 -l$(CURLLIBNAME)
+libwsdl4cpp_la_LIBADD +=  -lxerces-c-3.2 -l$(CURLLIBNAME)
 	
-libwsdl4cpp_la_SOURCES = $(WSDL_SRC) $(XCURL_SRC)
+libwsdl4cpp_la_SOURCES += $(XCURL_SRC)
+
 else
-libwsdl4cpp_la_LIBADD =  -L$(XERCESC_HOME)/lib -L$(CURL_HOME)/lib -lxerces-c
-	
-libwsdl4cpp_la_SOURCES = $(WSDL_SRC)
+
+	libwsdl4cpp_la_LIBADD +=  -lxerces-c
+
 endif

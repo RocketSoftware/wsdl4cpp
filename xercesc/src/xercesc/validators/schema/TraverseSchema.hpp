@@ -1,12 +1,13 @@
 /*
- * Copyright 2001-2002,2004 The Apache Software Foundation.
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,12 +15,20 @@
  * limitations under the License.
  */
 
+// @UnifaceCustomization
 /*
- * $Id: TraverseSchema.hpp 176347 2005-03-17 08:18:49Z amassari $
+ * $Id$
  */
+ /*******************************************************************************
+ date   refnum    version who description
+ 131114 b30332    E122    ahn Problem with unprefixed types, add $Id above for bug
+ XERCESC-1592, change 526239, merge our previous changes
+ date   refnum    version who description
+ *******************************************************************************/
+// @EndUnifaceCustomization
 
-#if !defined(TRAVERSESCHEMA_HPP)
-#define TRAVERSESCHEMA_HPP
+#if !defined(XERCESC_INCLUDE_GUARD_TRAVERSESCHEMA_HPP)
+#define XERCESC_INCLUDE_GUARD_TRAVERSESCHEMA_HPP
 
 /**
   * Instances of this class get delegated to Traverse the Schema and
@@ -66,8 +75,12 @@ class IdentityConstraint;
 class XSDLocator;
 class XSDDOMParser;
 class XMLErrorReporter;
-class InputSourceBuilder;
 
+// @UnifaceCustomization
+// andy
+class InputSourceBuilder;
+// andy end
+// @EndUnifaceCustomization
 
 class VALIDATORS_EXPORT TraverseSchema : public XMemory
 {
@@ -81,31 +94,40 @@ public:
         , XMLStringPool* const    uriStringPool
         , SchemaGrammar* const    schemaGrammar
         , GrammarResolver* const  grammarResolver
+        , RefHash2KeysTableOf<SchemaInfo>* cachedSchemaInfoList
+        , RefHash2KeysTableOf<SchemaInfo>* schemaInfoList
         , XMLScanner* const       xmlScanner
         , const XMLCh* const      schemaURL
         , XMLEntityHandler* const entityHandler
         , XMLErrorReporter* const errorReporter
         , MemoryManager* const    manager = XMLPlatformUtils::fgMemoryManager
+        , bool multipleImport = false
+        // @UnifaceCustomization
+        // andy
         , bool traverseLater = false
-		, InputSourceBuilder* const isBuilder = 0
+        , InputSourceBuilder* const isBuilder = 0
+        // andy end
+        // @EndUnifaceCustomization
     );
 
     ~TraverseSchema();
+    // @UnifaceCustomization
+    // andy
+    void preprocessOnlineSchema(DOMElement *const schemaRoot, const XMLCh *const schemaURL,
+                                bool multipleImport = false);
+    void traverseOnlineSchema(const DOMElement *const schemaRoot);
 
-    void preprocessOnlineSchema(DOMElement* const schemaRoot,
-                                      const XMLCh* const schemaURL);
-    void traverseOnlineSchema(const DOMElement* const schemaRoot);
-    
-    void                preprocessSchema(DOMElement* const schemaRoot,
-                                         const XMLCh* const schemaURL);
-    void                doTraverseSchema(const DOMElement* const schemaRoot);
+    void preprocessSchema(DOMElement *const schemaRoot, const XMLCh *const schemaURL, bool multipleImport = false);
+    void doTraverseSchema(const DOMElement *const schemaRoot);
+    // andy end
+    // @EndUnifaceCustomization
 
 private:
-  	 // This enumeration is defined here for compatibility with the CodeWarrior
-  	 // compiler, which apparently doesn't like to accept default parameter
-  	 // arguments that it hasn't yet seen. The Not_All_Context argument is
-  	 // used in the declaration of checkMinMax, below.
-  	 //
+    // This enumeration is defined here for compatibility with the CodeWarrior
+    // compiler, which apparently doesn't like to accept default parameter
+    // arguments that it hasn't yet seen. The Not_All_Context argument is
+    // used in the declaration of checkMinMax, below.
+    //
     // Flags indicate any special restrictions on minOccurs and maxOccurs
     // relating to "all".
     //    Not_All_Context    - not processing an <all>
@@ -138,6 +160,14 @@ private:
     /**
       * Traverse the Schema DOM tree
       */
+    // @UnifaceCustomization
+	// andy
+    // void                doTraverseSchema(const DOMElement* const schemaRoot);
+    // void                preprocessSchema(DOMElement* const schemaRoot,
+    //                                      const XMLCh* const schemaURL,
+    //                                      bool  multipleImport = false);
+	// andy end
+	// @EndUnifaceCustomization
     void                traverseSchemaHeader(const DOMElement* const schemaRoot);
     XSAnnotation*       traverseAnnotationDecl(const DOMElement* const childElem,
                                                ValueVectorOf<DOMNode*>* const nonXSAttList,
@@ -190,9 +220,11 @@ private:
                                              const XMLCh* const name,
                                              const XMLCh* const uriStr);
     ContentSpecNode*    traverseChoiceSequence(const DOMElement* const elemDecl,
-                                               const int modelGroupType);
+                                               const int modelGroupType,
+                                               bool& hasChildren);
     ContentSpecNode*    traverseAny(const DOMElement* const anyDecl);
-    ContentSpecNode*    traverseAll(const DOMElement* const allElem);
+    ContentSpecNode*    traverseAll(const DOMElement* const allElem,
+                                    bool& hasChildren);
     XercesGroupInfo*    traverseGroupDecl(const DOMElement* const childElem,
                                           const bool topLevel = true);
     XercesAttGroupInfo* traverseAttributeGroupDecl(const DOMElement* const elem,
@@ -207,8 +239,7 @@ private:
     void                traverseUnique(const DOMElement* const icElem,
                                        SchemaElementDecl* const elemDecl);
     void                traverseKeyRef(const DOMElement* const icElem,
-                                       SchemaElementDecl* const elemDecl,
-                                       const unsigned int namespaceDepth);
+                                       SchemaElementDecl* const elemDecl);
     bool                traverseIdentityConstraint(IdentityConstraint* const ic,
                                                    const DOMElement* const icElem);
 
@@ -235,14 +266,22 @@ private:
                            const XMLCh* const text2 = 0,
                            const XMLCh* const text3 = 0,
                            const XMLCh* const text4 = 0);
+    void reportSchemaError(const DOMElement* const elem,
+                           const XMLException&     except);
 
     // -----------------------------------------------------------------------
     //  Private Helper methods
     // -----------------------------------------------------------------------
     /**
-      * Retrived the Namespace mapping from the schema element
+      * Keep track of the xs:import found
       */
-    void retrieveNamespaceMapping(const DOMElement* const schemaRoot);
+    bool isImportingNS(const int namespaceURI);
+    void addImportedNS(const int namespaceURI);
+
+    /**
+      * Retrieved the Namespace mapping from the schema element
+      */
+    bool retrieveNamespaceMapping(const DOMElement* const elem);
 
     /**
       * Loop through the children, and traverse the corresponding schema type
@@ -260,6 +299,8 @@ private:
       *   rootElem - top element for a given type declaration
       *   contentElem - content must be annotation? or some other simple content
       *   isEmpty: - true if (annotation?, smth_else), false if (annotation?)
+      *   processAnnot - default is true, false if reprocessing a complex type
+      *                  since we have already processed the annotation.
       *
       * Check for Annotation if it is present, traverse it. If a sibling is
       * found and it is not an annotation return it, otherwise return 0.
@@ -267,7 +308,7 @@ private:
       */
     DOMElement* checkContent(const DOMElement* const rootElem,
                                DOMElement* const contentElem,
-                               const bool isEmpty);
+                               const bool isEmpty, bool processAnnot = true);
 
     /**
       * Parameters:
@@ -303,9 +344,6 @@ private:
 
     const XMLCh* resolvePrefixToURI(const DOMElement* const elem,
                                     const XMLCh* const prefix);
-    const XMLCh* resolvePrefixToURI(const DOMElement* const elem,
-                                    const XMLCh* const prefix,
-                                    const unsigned int namespaceDepth);
 
     /**
       * Return the prefix for a given rawname string
@@ -342,13 +380,15 @@ private:
     /**
       * Process a 'ref' of an Attribute declaration
       */
+    // @UnifaceCustomization
+    // andy void processAttributeDeclRef(const DOMElement* const elem,
     SchemaAttDef* processAttributeDeclRef(const DOMElement* const elem,
                                  ComplexTypeInfo* const typeInfo,
                                  const XMLCh* const refName,
                                  const XMLCh* const useVal,
                                  const XMLCh* const defaultVal,
                                  const XMLCh* const fixedVal);
-
+    // @EndUnifaceCustomization
     /**
       * Process a 'ref' on a group
       */
@@ -394,7 +434,7 @@ private:
       * the type is a complex type
       */
     ComplexTypeInfo* getElementComplexTypeInfo(const DOMElement* const elem,
-                                               const XMLCh* const typeStr,                                               
+                                               const XMLCh* const typeStr,
                                                const XMLCh* const otherSchemaURI);
 
     /**
@@ -437,9 +477,10 @@ private:
       */
     const XMLCh* getElementAttValue(const DOMElement* const elem,
                                     const XMLCh* const attName,
-                                    const bool toTrim = false);
+                                    const DatatypeValidator::ValidatorType attType = DatatypeValidator::UnKnown);
 
-    void checkMinMax(ContentSpecNode* const specNode,
+    /* return minOccurs */
+    int checkMinMax(ContentSpecNode* const specNode,
                      const DOMElement* const elem,
                      const int allContext = Not_All_Context);
 
@@ -449,8 +490,8 @@ private:
     void processComplexContent(const DOMElement* const elem,
                                const XMLCh* const typeName,
                                const DOMElement* const childElem,
-                               ComplexTypeInfo* const typeInfo,                               
-                               const XMLCh* const baseLocalPart,                               
+                               ComplexTypeInfo* const typeInfo,
+                               const XMLCh* const baseLocalPart,
                                const bool isMixed,
                                const bool isBaseAnyType = false);
 
@@ -489,7 +530,7 @@ private:
       * Process attributes of a complex type
       */
     void processAttributes(const DOMElement* const elem,
-                           const DOMElement* const attElem,                           
+                           const DOMElement* const attElem,
                            ComplexTypeInfo* const typeInfo,
                            const bool isBaseAnyType = false);
 
@@ -513,7 +554,7 @@ private:
 
     void restoreSchemaInfo(SchemaInfo* const toRestore,
                            SchemaInfo::ListType const aListType = SchemaInfo::INCLUDE,
-                           const int saveScope = Grammar::TOP_LEVEL_SCOPE);
+                           const unsigned int saveScope = Grammar::TOP_LEVEL_SCOPE);
     void  popCurrentTypeNameStack();
 
     /**
@@ -729,10 +770,10 @@ private:
     bool                                           fFullConstraintChecking;
     int                                            fTargetNSURI;
     int                                            fEmptyNamespaceURI;
-    int                                            fCurrentScope;
-    int                                            fScopeCount;
+    unsigned int                                   fCurrentScope;
+    unsigned int                                   fScopeCount;
     unsigned int                                   fAnonXSTypeCount;
-    unsigned int                                   fCircularCheckIndex;
+    XMLSize_t                                      fCircularCheckIndex;
     const XMLCh*                                   fTargetNSURIString;
     DatatypeValidatorFactory*                      fDatatypeRegistry;
     GrammarResolver*                               fGrammarResolver;
@@ -743,31 +784,30 @@ private:
     XMLStringPool*                                 fStringPool;
     XMLBuffer                                      fBuffer;
     XMLScanner*                                    fScanner;
-    NamespaceScope*                                fNamespaceScope;
     RefHashTableOf<XMLAttDef>*                     fAttributeDeclRegistry;
     RefHashTableOf<ComplexTypeInfo>*               fComplexTypeRegistry;
     RefHashTableOf<XercesGroupInfo>*               fGroupRegistry;
     RefHashTableOf<XercesAttGroupInfo>*            fAttGroupRegistry;
     RefHashTableOf<ElemVector>*                    fIC_ElementsNS;
-    RefHashTableOf<SchemaInfo>*                    fPreprocessedNodes;
+    RefHashTableOf<SchemaInfo, PtrHasher>*         fPreprocessedNodes;
     SchemaInfo*                                    fSchemaInfo;
     XercesGroupInfo*                               fCurrentGroupInfo;
     XercesAttGroupInfo*                            fCurrentAttGroupInfo;
     ComplexTypeInfo*                               fCurrentComplexType;
     ValueVectorOf<unsigned int>*                   fCurrentTypeNameStack;
     ValueVectorOf<unsigned int>*                   fCurrentGroupStack;
-    ValueVectorOf<unsigned int>*                   fIC_NamespaceDepth;
     ValueVectorOf<SchemaElementDecl*>*             fIC_Elements;
     ValueVectorOf<const DOMElement*>*              fDeclStack;
     ValueVectorOf<unsigned int>**                  fGlobalDeclarations;
     ValueVectorOf<DOMNode*>*                       fNonXSAttList;
-    RefHashTableOf<ValueVectorOf<DOMElement*> >*   fIC_NodeListNS;
-    RefHashTableOf<ValueVectorOf<unsigned int> >*  fIC_NamespaceDepthNS;
+    ValueVectorOf<int>*                            fImportedNSList;
+    RefHashTableOf<ValueVectorOf<DOMElement*>, PtrHasher>* fIC_NodeListNS;
     RefHash2KeysTableOf<XMLCh>*                    fNotationRegistry;
     RefHash2KeysTableOf<XMLCh>*                    fRedefineComponents;
     RefHash2KeysTableOf<IdentityConstraint>*       fIdentityConstraintNames;
     RefHash2KeysTableOf<ElemVector>*               fValidSubstitutionGroups;
     RefHash2KeysTableOf<SchemaInfo>*               fSchemaInfoList;
+    RefHash2KeysTableOf<SchemaInfo>*               fCachedSchemaInfoList;
     XSDDOMParser*                                  fParser;
     XSDErrorReporter                               fXSDErrorReporter;
     XSDLocator*                                    fLocator;
@@ -775,12 +815,15 @@ private:
     MemoryManager*                                 fGrammarPoolMemoryManager;
     XSAnnotation*                                  fAnnotation;
     GeneralAttributeCheck                          fAttributeCheck;
-
+    // @UnifaceCustomization
+    // andy 
     bool                                           fTraverseLater;
+    InputSourceBuilder*                            fInputSourceBuilder;
+    // andy end
+    // @EndUnifaceCustomization
 
-	InputSourceBuilder*                            fInputSourceBuilder;
-    
     friend class GeneralAttributeCheck;
+    friend class NamespaceScopeManager;
 };
 
 
@@ -803,9 +846,9 @@ inline const XMLCh* TraverseSchema::getPrefix(const XMLCh* const rawName) {
 inline const XMLCh* TraverseSchema::getLocalPart(const XMLCh* const rawName) {
 
     int    colonIndex = XMLString::indexOf(rawName, chColon);
-    int    rawNameLen = XMLString::stringLen(rawName);
+    XMLSize_t rawNameLen = XMLString::stringLen(rawName);
 
-    if (colonIndex + 1 == rawNameLen) {
+    if (XMLSize_t(colonIndex + 1) == rawNameLen) {
         return XMLUni::fgZeroLenString;
     }
 
@@ -818,35 +861,6 @@ inline const XMLCh* TraverseSchema::getLocalPart(const XMLCh* const rawName) {
     }
 
     return fStringPool->getValueForId(fStringPool->addOrFind(fBuffer.getRawBuffer()));
-}
-
-inline
-const XMLCh* TraverseSchema::getElementAttValue(const DOMElement* const elem,
-                                                const XMLCh* const attName,
-                                                const bool toTrim) {
-
-    DOMAttr* attNode = elem->getAttributeNode(attName);
-
-    if (attNode == 0) {
-        return 0;
-    }
-
-    const XMLCh* attValue = attNode->getValue();
-
-    if (toTrim) {
-
-        fBuffer.set(attValue);
-        XMLCh* bufValue = fBuffer.getRawBuffer();
-        XMLString::trim(bufValue);
-
-        if (!bufValue || !*bufValue) {
-            return XMLUni::fgZeroLenString;
-        }
-
-        return fStringPool->getValueForId(fStringPool->addOrFind(bufValue));
-    }
-
-    return attValue;
 }
 
 inline void
@@ -889,7 +903,7 @@ inline const XMLCh* TraverseSchema::genAnonTypeName(const XMLCh* const prefix) {
 
     XMLCh anonCountStr[16]; // a count of 15 digits should be enough
 
-    XMLString::binToText(fAnonXSTypeCount++, anonCountStr, 15, 10, fMemoryManager);
+    XMLString::sizeToText(fAnonXSTypeCount++, anonCountStr, 15, 10, fMemoryManager);
     fBuffer.set(prefix);
     fBuffer.append(anonCountStr);
 
@@ -898,7 +912,7 @@ inline const XMLCh* TraverseSchema::genAnonTypeName(const XMLCh* const prefix) {
 
 inline void TraverseSchema::popCurrentTypeNameStack() {
 
-    unsigned int stackSize = fCurrentTypeNameStack->size();
+    XMLSize_t stackSize = fCurrentTypeNameStack->size();
 
     if (stackSize != 0) {
         fCurrentTypeNameStack->removeElementAt(stackSize - 1);
@@ -925,6 +939,24 @@ inline void TraverseSchema::getRedefineNewTypeName(const XMLCh* const oldTypeNam
     }
 }
 
+inline bool TraverseSchema::isImportingNS(const int namespaceURI) {
+
+    if (!fImportedNSList)
+        return false;
+
+    return (fImportedNSList->containsElement(namespaceURI));
+}
+
+inline void TraverseSchema::addImportedNS(const int namespaceURI) {
+
+    if (!fImportedNSList) {
+        fImportedNSList = new (fMemoryManager) ValueVectorOf<int>(4, fMemoryManager);
+    }
+
+    if (!fImportedNSList->containsElement(namespaceURI))
+        fImportedNSList->addElement(namespaceURI);
+}
+
 XERCES_CPP_NAMESPACE_END
 
 #endif
@@ -932,4 +964,3 @@ XERCES_CPP_NAMESPACE_END
 /**
   * End of file TraverseSchema.hpp
   */
-
