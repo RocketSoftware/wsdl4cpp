@@ -268,8 +268,8 @@ bool self_test()
     test_cases.push_back(test_case("https://upgrade.badssl.com/", 819, false));
     test_cases.push_back(test_case("https://preloaded-hsts.badssl.com/", 851, false));
 #if defined(_WIN32) || defined(WIN32)    
-    test_cases.push_back(test_case("https://tls-v1-0.badssl.com:1010/", 496, false));
-    test_cases.push_back(test_case("https://tls-v1-1.badssl.com:1011/", 496, false));
+    test_cases.push_back(test_case("https://tls-v1-0.badssl.com:1010/", 496, true)); // 4ed2ffd0
+    test_cases.push_back(test_case("https://tls-v1-1.badssl.com:1011/", 496, true)); // 4ed2ffd0
     test_cases.push_back(test_case("https://tls-v1-2.badssl.com:1012/", 502, false));  
     test_cases.push_back(test_case("https://subdomain.preloaded-hsts.badssl.com/", 0, true));
     test_cases.push_back(test_case("https://superfish.badssl.com/", 498, false));    
