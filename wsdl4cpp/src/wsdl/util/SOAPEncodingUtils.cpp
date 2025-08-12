@@ -12,6 +12,7 @@
 /*******************************************************************************
 date   refnum    version who description
 070202 c25507    9.SOAP  ahn direct import of soapencoding.xsd
+120907 b29663    E110    ahn better error reporting
 date   refnum    version who description
 *******************************************************************************/
 #include "wsdl/wsdlxerces.hpp"
@@ -102,17 +103,21 @@ void SOAPEncodingUtils::addImport(
         }
     }
     if ( shouldImportSoapEncoding ) {
-        DOMElement* importElement = doc->createElementNS(nsURI, Constants::ELEM_IMPORT);
+        // @b29663 dummy import gets line = 0 and col = 0
+        DOMElement* importElement = doc->createElementNS(nsURI, Constants::ELEM_IMPORT, 0, 0);
 //          importElement.setAttributeNS(nsURI, "namespace", SOAP_ENCODING_URI);
 //          importElement.setAttributeNS(nsURI, "schemaLocation", SOAP_ENCODING_URI);
-        importElement->setAttribute(Constants::ATTR_NAMESPACE, NS_URI_ENCODING);
+
+//        importElement->setAttribute(Constants::ATTR_NAMESPACE, NS_URI_ENCODING);
+          importElement->setAttributeNS((const XMLCh *)0, Constants::ATTR_NAMESPACE, NS_URI_ENCODING);
 
         //importElement->setAttribute(SchemaConstants::ATTR_SCHEMA_LOCATION, SOAPConstants::NS_URI_ENCODING);
         // @c25507 removed forward slash, dir spec should be complete
         XMLChString uri = def->getSOAPEncBaseURI() + DEFAULT_ENCODING_LOCATION;
-        importElement->setAttribute(
-            SchemaConstants::ATTR_SCHEMA_LOCATION, uri.c_str());
-        
+//        importElement->setAttribute(
+//            SchemaConstants::ATTR_SCHEMA_LOCATION, uri.c_str());
+        importElement->setAttributeNS((const XMLCh *)0, SchemaConstants::ATTR_SCHEMA_LOCATION, uri.c_str());
+  
         DOMNode* fChild = schemaElement->getFirstChild();
         schemaElement->insertBefore(importElement, fChild);
     }

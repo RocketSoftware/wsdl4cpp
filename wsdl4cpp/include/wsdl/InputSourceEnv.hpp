@@ -5,6 +5,8 @@
 
 /*
  * $Id:$
+ *
+ * %fv: % %dc: %
  */
 
 
@@ -15,8 +17,6 @@
 #include <xercesc/util/PlatformUtils.hpp>
 
 #include "wsdl/wsdlbas.hpp"
-
-XERCES_CPP_NAMESPACE_USE
 
 WSDL_NAMESPACE_BEGIN
 
@@ -43,7 +43,10 @@ public:
     /** @name Constructors and Destructor */
     //@{
     /** Default constructor */
-	InputSourceEnv() : authenticated(false){};
+	InputSourceEnv() : authenticated(false)
+        , fConnectTimeout(0)
+        , fTransactionTimeout(0)
+    {};
 
   /**
     * Destructor
@@ -94,6 +97,33 @@ public:
     */
     virtual const char* getProxyPassword() const { return fProxyPassword.c_str(); }
 
+  /**
+    * Get the authenticated.
+    *
+    * @return The boolean value.
+    * @see #setAuthenticated
+    */
+	virtual bool isAuthenticated()
+	{
+		return authenticated;
+	}
+
+  /**
+    * Get the connect timeout.
+    *
+    * @return the timeout duration in milliseconds.
+    * @see #setConnectTimeout
+    */
+    virtual long getConnectTimeout() const { return fConnectTimeout; }
+
+  /**
+    * Set the transaction timeout.
+    *
+    * @return the timeout duration in milliseconds.
+    * @see #setTransactionTimeout
+    */
+    virtual long getTransactionTimeout() const { return fTransactionTimeout; }
+
     //@}
 
 
@@ -126,8 +156,6 @@ public:
     * Set the proxy user id.
     *
     * @param proxyUserId The proxy user id as a string.
-    * @see Locator#getProxyUserId
-    * @see SAXParseException#getProxyUserId
     * @see #getProxyUserId
     */
     virtual void setProxyUserId(std::string const proxyUserId)
@@ -141,8 +169,6 @@ public:
     *
     * @param proxyPassword The proxy password as a string.
     * @see #getProxyPassword
-    * @see Locator#getProxyPassword
-    * @see SAXParseException#getProxyPassword
     */
     virtual void setProxyPassword(std::string const proxyPassword)
 	{
@@ -150,16 +176,37 @@ public:
 		setAuthenticated(true);
 	}
 
-	/**
-	 */
-	virtual bool isAuthenticated()
-	{
-		return authenticated;
-	}
-
+  /**
+    * Set the authenticated.
+    *
+    * @param b The boolean value.
+    * @see #isAuthenticated
+    */
 	virtual void setAuthenticated(bool b)
 	{
 		authenticated = b;
+	}
+
+  /**
+    * Set the connect timeout.
+    *
+    * @param timeout the timeout duration in milliseconds.
+    * @see #getConnectTimeout
+    */
+    virtual void setConnectTimeout(long timeout)
+	{
+		fConnectTimeout = timeout;
+	}
+
+  /**
+    * Set the transaction timeout.
+    *
+    * @param timeout the timeout duration in milliseconds.
+    * @see #getTransactionTimeout
+    */
+    virtual void setTransactionTimeout(long timeout)
+	{
+		fTransactionTimeout = timeout;
 	}
 
     //@}
@@ -185,6 +232,9 @@ private:
     std::string    fProxyUserId;
     std::string    fProxyPassword;
 	bool authenticated;
+
+    long fConnectTimeout;           /// Connection timeout in ms
+    long fTransactionTimeout;       /// Transaction timeout in ms
 };
 
 

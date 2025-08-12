@@ -22,6 +22,12 @@
  * revision  date    refnum    version  who  description
  * 
  */
+/*******************************************************************************
+date   refnum    version who description
+120907 b29663    E110    ahn better error reporting
+date   refnum    version who description
+*******************************************************************************/
+
 #ifndef WSDLREADER_HPP_
 #define WSDLREADER_HPP_
 #include <map>
@@ -40,6 +46,7 @@
 #include "wsdl/util/DOMUtils.hpp"
 #include "wsdl/WSDLException.hpp"
 #include "wsdl/schema/Schema.hpp"
+#include "wsdl/WsdlErrorHandler.hpp"
 
 WSDL_NAMESPACE_BEGIN
 
@@ -93,6 +100,13 @@ public:
      * @return the input source environment.
      */
 	void setInputSourceEnv(const InputSourceEnvPtr ptr) { isePtr = ptr;}
+
+    /**
+     * Returns the Wsdl Error Handler.
+     * @return the Wsdl Error Handler environment.
+     */
+	WsdlErrorHandlerPtr getWsdlErrorHandler() const { return errPtr; }
+
 
 protected:
     typedef std::map<XMLChString, DefinitionsPtr, lessXMLCh> StrDefMap;
@@ -206,7 +220,8 @@ protected:
     XMLChString soapEncBaseURI;
 	InputSourceEnvPtr isePtr;
 	bool usingCURL;
-    
+    WsdlErrorHandlerPtr errPtr;
+
 	XERCES_CPP_NAMESPACE_QUALIFIER MemoryManager* fMemoryManager;
 	XERCES_CPP_NAMESPACE_QUALIFIER DOMImplementation* impl;
 

@@ -1,0 +1,18 @@
+# Change log - WSDL4CPP
+
+Current release 10.4.03.000
+
+
+## Release 10.4.03.000
+  
+### What's new?:
+ - Added support for one-way operation;
+ - Improved error report;
+ - Xerces-C++ Version was updated from 2.7.0 to 3.2.5;
+ - libcurl version was updated from 7.16.0 to 8.4.0.
+
+## Release 0.9.2b
+  
+### What's new?:
+ - Initial version of this repository WSDL4CPP on GitHub. 
+ - This is a beta release. This release is a cloned copy of the release 0.9.2b from WSDL4CPP on SourceForge, see https://sourceforge.net/projects/wsdl4cpp/.

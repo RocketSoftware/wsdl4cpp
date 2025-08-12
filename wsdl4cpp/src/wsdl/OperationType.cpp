@@ -9,6 +9,12 @@
  * WSDL4J is an open source toolkit (See "http://sourceforge.net/projects/wsdl4j")
  * under the Common Public License Version 1.0
  */
+/*******************************************************************************
+date   refnum    version who description
+120101 c29155    E103    ahn Determine operation type, oneway, requestresponse, etc correctly on RSD
+date   refnum    version who description
+*******************************************************************************/
+
 #include <xercesc/util/XMLUniDefs.hpp>
 #include "wsdl/OperationType.hpp"
 
@@ -33,14 +39,11 @@ const XMLCh XMLCH_NOTIFICATION[] = {
     chLatin_F, chLatin_I, chLatin_C, chLatin_A, 
     chLatin_T, chLatin_I, chLatin_O, chLatin_N, chNull };
 
-const OperationTypePtr OperationType::ONE_WAY(
-    new OperationType(XMLCH_ONE_WAY));
-const OperationTypePtr OperationType::REQUEST_RESPONSE(
-    new OperationType(XMLCH_REQUEST_RESPONSE));
-const OperationTypePtr OperationType::SOLICIT_RESPONSE(
-    new OperationType(XMLCH_SOLICIT_RESPONSE));
-const OperationTypePtr OperationType::NOTIFICATION(
-    new OperationType(XMLCH_NOTIFICATION));
+// @c29155 only a declaration here
+OperationTypePtr OperationType::ONE_WAY;
+OperationTypePtr OperationType::REQUEST_RESPONSE;
+OperationTypePtr OperationType::SOLICIT_RESPONSE;
+OperationTypePtr OperationType::NOTIFICATION;
 
 OperationType::OperationType(XMLChString theId)
     : id(theId)
@@ -49,6 +52,24 @@ OperationType::OperationType(XMLChString theId)
 
 OperationType::~OperationType()
 {
+}
+
+// @c29155 explicitly initialise
+void OperationType::init()
+{
+    ONE_WAY = (OperationTypePtr)new OperationType(XMLCH_ONE_WAY);
+    REQUEST_RESPONSE = (OperationTypePtr)new OperationType(XMLCH_REQUEST_RESPONSE);
+    SOLICIT_RESPONSE = (OperationTypePtr)new OperationType(XMLCH_SOLICIT_RESPONSE);
+    NOTIFICATION = (OperationTypePtr)new OperationType(XMLCH_NOTIFICATION);
+}
+
+// @c29155 explicitly release
+void OperationType::release()
+{
+    ONE_WAY = (OperationTypePtr)0;
+    REQUEST_RESPONSE = (OperationTypePtr)0;
+    SOLICIT_RESPONSE = (OperationTypePtr)0;
+    NOTIFICATION = (OperationTypePtr)0;
 }
 
 WSDL_NAMESPACE_END

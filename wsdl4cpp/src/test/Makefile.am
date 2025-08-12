@@ -6,7 +6,7 @@ noinst_PROGRAMS = wsdltest
 
 if XCURL
 wsdltest_LDADD = $(top_builddir)/src/wsdl/libwsdl4cpp.la \
-	-L$(XERCESC_HOME)/lib -lxercesc2_70 -L$(CURL_HOME)/lib -l$(CURLLIBNAME)
+	-L$(XERCESC_HOME)/lib -lxerces-c-3.2 -L$(CURL_HOME)/lib -l$(CURLLIBNAME) -L$(OPENSSL_HOME)/lib -lssl -lcrypto
 else
 wsdltest_LDADD = $(top_builddir)/src/wsdl/libwsdl4cpp.la \
 	-L$(XERCESC_HOME)/lib -lxerces-c
