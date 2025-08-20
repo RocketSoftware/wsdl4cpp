@@ -1,9 +1,12 @@
-Xerces-C++ Extension 3.2.5 for WSDL4CPP
+Xerces-C++ Extension for WSDL4CPP
 =======================================
 
-The original source files are from apache package:
+This is an extension of Xerces-C++ for WSDL4CPP, under the Apache License 
+version 2.0, see the file xercesc/license.txt.
 
-Xerces-C++ Version 3.2.5
+The original source files are from apache package Xerces-C++ 
+(https://xerces.apache.org/xerces-c/). The current Xerces-C++ version used
+here is 3.2.5. 
 
 -------------------
  How to build
@@ -23,7 +26,10 @@ What's new?
   - Improved exception messages.
     
 New files:
+  xercesc/license.txt
   xercesc/src/CMakeLists.txt
+  xercesc/src/xercesc/sax/SAXParseException.hpp
+  xercesc/src/xercesc/sax/SAXParseException.cpp
   xercesc/src/xercesc/util/XMLExceptMsgs.hpp
 
 Modification:
