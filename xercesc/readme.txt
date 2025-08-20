@@ -5,8 +5,8 @@ This is an extension of Xerces-C++ for WSDL4CPP, under the Apache License
 version 2.0, see the file xercesc/license.txt.
 
 The original source files are from apache package Xerces-C++ 
-(https://xerces.apache.org/xerces-c/). The current Xerces-C++ version used
-here is 3.2.5. 
+(https://xerces.apache.org/xerces-c/), which is under the Apache License 
+version 2.0. The current Xerces-C++ version used here is 3.2.5. 
 
 -------------------
  How to build
