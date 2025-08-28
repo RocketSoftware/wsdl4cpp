@@ -52,18 +52,70 @@ How to build on unix platforms
 Please read the file named "INSTALL".
 
 
+
+
 How to build on windows platforms
 =================================
 
-1. Start Microsoft Visual Studio 2005, and open the Microsoft Visual Studio 
-Solution file: "projects\vc2005\wsdl4cpp.sln" 
+Prerequisite building tools:
+- [Strawberry Perl](https://strawberryperl.com/)
+- [CMake](https://cmake.org/)
+- [GNU Make](http://gnuwin32.sourceforge.net/packages/make.htm)
+- [Visual Studio 2022](https://visualstudio.microsoft.com/)
 
-2. Open the project properties dialog. Change the include and linking library
-   paths of required Xerces-C and libcurl package.
+Dependent packages:
+- [libcurl 8.4.0](http://curl.haxx.se/)
+- [Xerces-C++ Version 3.2.5](http://xml.apache.org/xerces-c/)
+
+Ensure cmake and perl are on your path by adding their installation 
+directories to your `PATH` environment variable. E.g.
+```
+set PATH "%PATH%;C:\Program Files\NASM;C:\Program Files\CMake\bin;C:\Strawberry\perl\bin"
+```
+
+Steps:
+
+1. Assume we are going to build release version of WSDL4CPP on Windows 64bit 
+   platform (others are similar);
+
+2. Create a local directory as the work directory to build WSDL4CPP. let us 
+   use C:\build;
+
+3. Clone from GitHub or copy the WSDL4CPP project folder to 
+   C:\build\wsdl4cpp; Make sure there exists the file:
+   C:\build\wsdl4cpp\wsdl4cpp\README;
+
+4. Download the Xerces-C++ 3.2.5 src package and unzip it to 
+   C:\build\xerces; Make sure there exists the file: 
+   C:\build\xerces\src\CMakeLists.txt;
+  4.1. Copy C:\build\wsdl4cpp\xercesc\src to C:\build\xerces\src;
+  4.2. Build the Xerces-C++ 3.2.5 in C:\build\xerces, and copy the 
+     generated binary into C:\build\output\wa1\release\; Make sure its 
+     include files are under C:\build\output\wa1\release\include, and 
+     its lib files are under C:\build\output\wa1\release\lib;
+
+5. Download the binary package of libCurl 8.4.0 for Windows 64bit, and unzip 
+   it into C:\build\output\wa1\release\; Make sure its include files are 
+   under C:\build\output\wa1\release\include, and its lib files are 
+   under C:\build\output\wa1\release\lib;
+
+6. Start Microsoft Visual Studio 2022, and open the Microsoft Visual Studio 
+   Solution file: "C:\build\wsdl4cpp\wsdl4cpp\projects\vc17\wsdl4cpp.sln" 
+
+7. Open the project properties dialog. Change the include and linking library
+   paths of required Xerces-C++ and libcurl package.
    
-3. Build wsdl4cpp project for creating the major dll.
+8. Build 64bit release of wsdl4cpp project for creating the major dll.
 
-4. Build wsdltest project. This will create a sample program for you.
+9. Build wsdltest project. This will create a sample program for you.
+
+Similar for other build configuration. Make sure that the include and lib 
+files of libCurl and Xerces-C++ are located at:
+   - C:\build\output\wa1\debug for 64bit debug build;
+   - C:\build\output\wa1\release for 64bit release build;
+   - C:\build\output\w2k\debug for 32bit debug build;
+   - C:\build\output\w2k\release for 32bit release build.
+
 
 Limitation
 ==========
