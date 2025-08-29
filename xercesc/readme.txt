@@ -12,8 +12,8 @@ version 2.0. The current Xerces-C++ version used here is 3.2.5.
  How to build
 -------------------
 1. Download Xerces-C++ Version 3.2.5 from https://xerces.apache.org/xerces-c/;
-2. Unzip it to some directory;
-3. Copy the "src" subdirectory here to overwrite the "src" subdirectory 
+2. Unzip it to some build directory;
+3. Copy the "src" subdirectory this build directory to overwrite the "src" subdirectory 
    in the Xerces-C++ directory;
 4. Rebuild Xerces-C++.
 
