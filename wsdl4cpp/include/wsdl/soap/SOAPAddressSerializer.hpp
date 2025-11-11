@@ -9,6 +9,9 @@
  * WSDL4J is an open source toolkit (See "http://sourceforge.net/projects/wsdl4j")
  * under the Common Public License Version 1.0
  */
+/*
+ * From release 1.0.0, WSDL4CPP is under the Eclipse Public License - v 2.0 (EPL 2.0)
+ */
 #ifndef SOAPADDRESSSERIALIZER_HPP_
 #define SOAPADDRESSSERIALIZER_HPP_
 #include <xercesc/dom/DOMElement.hpp>
