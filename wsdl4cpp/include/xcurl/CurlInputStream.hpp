@@ -6,7 +6,9 @@
  * Written by Ming Zhu, Jan 2007
  * 
  */
-
+/*
+ * (c) Rocket Software, Inc. or its affiliates
+ */
 #if !defined(CURLINPUTSTREAM_HPP)
 #define CURLINPUTSTREAM_HPP
 
