@@ -15,12 +15,14 @@
  * --------------------------------------------------------------------------
  * revision  date    refnum    version  who  description
  */
+/*
+ * (c) 2025 Rocket Software, Inc. or its affiliates
+ */
 /*******************************************************************************
 date   refnum    version who description
 120907 b29663    E110    ahn better error reporting
 date   refnum    version who description
 *******************************************************************************/
-
 #ifndef XERCESUTILS_HPP_
 #define XERCESUTILS_HPP_
 #include <xercesc/util/XercesDefs.hpp>

@@ -1,3 +1,14 @@
+/*
+ * %fv:WsdlTest.cpp-10 % 
+ * 
+ * Written by Ming Zhu, March 2006
+ * 
+ */
+/*
+ * From release 1.0.0, WSDL4CPP is under the Eclipse Public License - v 2.0 (EPL 2.0)
+ *
+ * (c) 2025 Rocket Software, Inc. or its affiliates
+ */
 #include <algorithm>
 #include <iostream>
 #include <iterator>

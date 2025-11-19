@@ -21,6 +21,11 @@
  * revision  date    refnum    version  who  description
  * 
  */
+/*
+ * From release 1.0.0, WSDL4CPP is under the Eclipse Public License - v 2.0 (EPL 2.0)
+ *
+ * (c) 2025 Rocket Software, Inc. or its affiliates
+ */
 #include "wsdl/wsdlxerces.hpp"
 
 #include <xercesc/util/XMLUniDefs.hpp>
