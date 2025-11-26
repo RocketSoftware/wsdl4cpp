@@ -1,9 +1,7 @@
 /*
  * %fv:Types.hpp-5 % 
  * 
- * Written by Ming Zhu (ming.zhu@nl.compuware.com), March 2006
- * 
- * (c) Copyright Compuware Corp 2007
+ * Written by Ming Zhu, March 2006
  * 
  * (c) 2025 Rocket Software, Inc. or its affiliates
  * 
@@ -45,7 +43,7 @@ DEFINE_PTR(Types);
  * 
  * @author  Matthew J. Duftler (duftler@us.ibm.com, for original java 
  *                              implementation)
- * @author  Ming Zhu (ming.zhu@nl.compuware.com, for C++ migration) 
+ * @author  Ming Zhu (for C++ migration) 
  */
 class WSDL_EXPORT Types : 
     public Documented 

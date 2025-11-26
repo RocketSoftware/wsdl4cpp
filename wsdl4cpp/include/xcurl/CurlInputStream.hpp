@@ -16,8 +16,6 @@
 /*
  * $Id: CurlInputStream.cpp 179465 2005-06-01 23:54:46Z jberry $
  * 
- * (c) Copyright Compuware Corp 2007
- * 
  * (c) 2025 Rocket Software, Inc. or its affiliates
  * 
  * Written by Ming Zhu, Jan 2007

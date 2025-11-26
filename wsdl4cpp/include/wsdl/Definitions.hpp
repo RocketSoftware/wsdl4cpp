@@ -1,9 +1,7 @@
 /*
  * %fv:Definitions.hpp-11 % 
  * 
- * Written by Ming Zhu (ming.zhu@nl.compuware.com), March 2006
- * 
- * (c) Copyright Compuware Corp 2007
+ * Written by Ming Zhu, March 2006
  * 
  * (c) 2025 Rocket Software, Inc. or its affiliates
  * 
@@ -56,7 +54,7 @@ WSDL_NAMESPACE_BEGIN
 
 /**
  * This class represents a WSDL definition.
- * @author  Ming Zhu (ming.zhu@nl.compuware.com)
+ * @author  Ming Zhu
  * @version %v:%, rev07
  */
 class WSDL_EXPORT Definitions
