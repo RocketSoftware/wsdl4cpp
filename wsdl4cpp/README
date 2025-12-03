@@ -1,31 +1,36 @@
 Introduction
 ============
 
-The Web Services Description Language for C++ Toolkit (WSDL for C++ 
-Toolkit, or simply "WSDL4CPP") allows the parsing, representation, 
-and manipulation of WSDL documents. In the future release, it will
-allow the creation of WSDL documents too. It is a C++-port of WSDL4J 
-toolkit (http://sourceforge.net/projects/wsdl4j).
+The Web Services Description Language for C++ Toolkit (WSDL for C++ Toolkit, 
+or simply "WSDL4CPP") allows the parsing, representation, and manipulation of 
+WSDL documents. In the future release, it will allow the creation of WSDL 
+documents too. It is a C++-port of WSDL4J toolkit 
+(http://sourceforge.net/projects/wsdl4j), which is under the Common Public 
+License (CPL) version 1.0 and IBM Copyright 2005 (See 
+http://sourceforge.net/projects/wsdl4j for details).
 
-This toolkit is under the Common Public License (CPL) version 1.0.
-And Compuware Corporation is the major contributor for the first
-release.
+Its first release 0.9.2b is published in SourceForge 
+https://wsdl4cpp.sourceforge.net/ under the CPL v1.0 license And Compuware 
+Corporation is the major contributor for it.
 
-The WSDL4J toolkit is also under CPL v1.0 and IBM Copyright 2005 
-(See http://sourceforge.net/projects/wsdl4j for details).
+This project in GitHub is a successor of the project WSDL4CPP in SourceForge, 
+and it is under the Eclipse Public License version 2.0 (EPL2.0) license (see 
+file wsdl4cpp/LICENSE). And Rocket Software is the major contributor for the 
+releases in this project.
+
 
 Requirements
 ============
 
 WSDL4CPP has the following requirements:
 
-1. Xerces-C++ Version 2.7.0
+1. Xerces-C++ Version 3.2.5
    Xerces-C++ is a validating XML parser written in a portable subset of 
-   C++. It is an open source toolkit underthe Apache License, Version 2.0.
+   C++. It is an open source toolkit under the Apache License, Version 2.0.
    You can download it from the site:
               http://xml.apache.org/xerces-c/
   
-2. Optionally, libcurl 7.16.2 is required.
+2. Optionally, libcurl 8.4.0 is required.
    libcurl is a free and easy-to-use client-side URL transfer library, 
    supporting HTTP, HTTPS and other network transport protocols. 
    You can download it from the site:
@@ -33,17 +38,17 @@ WSDL4CPP has the following requirements:
    Remark: this is optional, only required when you want to use libcurl as
    the HTTP transport layer for URL accessing in WSDL.
    
-3. Optionally, A special patch of Xerces-C++ Version 2.7.0
-   This patch is specially developped for this toolkit. You can find it
+3. Optionally, A special patch of Xerces-C++ Version 3.2.5
+   This patch is specially developed for this toolkit. You can find it
    in the same package of this WSDL4CPP release.
    
    How to use the patch:
-   Copy this patch to your Xerces-C++ 2.7.0 installation directory and 
+   Copy this patch to your Xerces-C++ 3.2.5 installation directory and 
    rebuild your Xerces-C++.
    
    Remark:
-   1) This patch has some bug-fix and some enhancement in Xerces-C++ 2.7.0;
-   2) This patch enhanced Xerces-C++ 2.7.0 for integration with libcurl.
+   1) This patch has some bug-fix and some enhancement in Xerces-C++ 3.2.5;
+   2) This patch enhanced Xerces-C++ 3.2.5 for integration with libcurl.
    
   
 How to build on unix platforms
@@ -52,18 +57,70 @@ How to build on unix platforms
 Please read the file named "INSTALL".
 
 
+
+
 How to build on windows platforms
 =================================
 
-1. Start Microsoft Visual Studio 2005, and open the Microsoft Visual Studio 
-Solution file: "projects\vc2005\wsdl4cpp.sln" 
+Prerequisite building tools:
+- [Strawberry Perl](https://strawberryperl.com/)
+- [CMake](https://cmake.org/)
+- [GNU Make](http://gnuwin32.sourceforge.net/packages/make.htm)
+- [Visual Studio 2022](https://visualstudio.microsoft.com/)
 
-2. Open the project properties dialog. Change the include and linking library
-   paths of required Xerces-C and libcurl package.
+Dependent packages:
+- [libcurl 8.4.0](http://curl.haxx.se/)
+- [Xerces-C++ Version 3.2.5](http://xml.apache.org/xerces-c/)
+
+Ensure cmake and perl are on your path by adding their installation 
+directories to your `PATH` environment variable. E.g.
+```
+set PATH "%PATH%;C:\Program Files\NASM;C:\Program Files\CMake\bin;C:\Strawberry\perl\bin"
+```
+
+Steps:
+
+1. Assume we are going to build release version of WSDL4CPP on Windows 64bit 
+   platform (others are similar);
+
+2. Create a local directory as the work directory to build WSDL4CPP. let us 
+   use C:\build;
+
+3. Clone from GitHub or copy the WSDL4CPP project folder to 
+   C:\build\wsdl4cpp; Make sure there exists the file:
+   C:\build\wsdl4cpp\wsdl4cpp\README;
+
+4. Download the Xerces-C++ 3.2.5 src package and unzip it to 
+   C:\build\xerces; Make sure there exists the file: 
+   C:\build\xerces\src\CMakeLists.txt;
+  4.1. Copy C:\build\wsdl4cpp\xercesc\src to C:\build\xerces\src;
+  4.2. Build the Xerces-C++ 3.2.5 in C:\build\xerces, and copy the 
+     generated binary into C:\build\output\wa1\release\; Make sure its 
+     include files are under C:\build\output\wa1\release\include, and 
+     its lib files are under C:\build\output\wa1\release\lib;
+
+5. Download the binary package of libCurl 8.4.0 for Windows 64bit, and unzip 
+   it into C:\build\output\wa1\release\; Make sure its include files are 
+   under C:\build\output\wa1\release\include, and its lib files are 
+   under C:\build\output\wa1\release\lib;
+
+6. Start Microsoft Visual Studio 2022, and open the Microsoft Visual Studio 
+   Solution file: "C:\build\wsdl4cpp\wsdl4cpp\projects\vc17\wsdl4cpp.sln" 
+
+7. Open the project properties dialog. Change the include and linking library
+   paths of required Xerces-C++ and libcurl package.
    
-3. Build wsdl4cpp project for creating the major dll.
+8. Build 64bit release of wsdl4cpp project for creating the major dll.
 
-4. Build wsdltest project. This will create a sample program for you.
+9. Build wsdltest project. This will create a sample program for you.
+
+Similar for other build configuration. Make sure that the include and lib 
+files of libCurl and Xerces-C++ are located at:
+   - C:\build\output\wa1\debug for 64bit debug build;
+   - C:\build\output\wa1\release for 64bit release build;
+   - C:\build\output\w2k\debug for 32bit debug build;
+   - C:\build\output\w2k\release for 32bit release build.
+
 
 Limitation
 ==========

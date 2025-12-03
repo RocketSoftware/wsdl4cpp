@@ -1,6 +1,4 @@
 /*
- * %fv:SchemaModel.hpp-5 % 
- * 
  * Written by Ming Zhu, March 2006
  * 
  * History:

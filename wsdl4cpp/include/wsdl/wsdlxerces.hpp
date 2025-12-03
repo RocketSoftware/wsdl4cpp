@@ -1,6 +1,4 @@
 /*
- * %fv:wsdlxerces.hpp-8 % 
- * 
  * Written by Ming Zhu, March 2006
  * 
  * History:
@@ -29,8 +27,6 @@
 #include <xercesc/util/XercesDefs.hpp>
 #include <xercesc/util/XMLString.hpp>
 #include "wsdl/wsdlbas.hpp"
-
-//XERCES_CPP_NAMESPACE_USE
 
 WSDL_NAMESPACE_BEGIN
 
@@ -186,7 +182,7 @@ private:
     
 };
 
-#define null XMLChString::getNull()
+#define null wsdl::XMLChString::getNull()
 //static const XMLChString null;
 
 bool inline operator==(

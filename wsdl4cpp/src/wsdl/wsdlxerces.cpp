@@ -1,6 +1,4 @@
 /*
- * %fv:wsdlxerces.cpp-5 % 
- * 
  * Written by Ming Zhu, March 2006
  * 
  * History:

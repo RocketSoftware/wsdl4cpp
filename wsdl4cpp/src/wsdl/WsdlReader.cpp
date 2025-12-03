@@ -1,13 +1,11 @@
 /*
- * %fv:WsdlReader.cpp-16 % 
- * 
  * Written by Ming Zhu, March 2006
  * 
- * (c) Copyright Compuware Corp 2007
+ * (c) 2025 Rocket Software, Inc. or its affiliates
  * 
- * WSDL4CPP is a C++ translation of WSDL4J.
- * WSDL4J is an open source toolkit (See "http://sourceforge.net/projects/wsdl4j")
- * under the Common Public License Version 1.0
+ * WSDL4CPP is under the Eclipse Public License version 2.0 (EPL2.0).
+ * It is a C++ translation of WSDL4J (an open source toolkit, see
+ * "http://sourceforge.net/projects/wsdl4j").
  * 
  * History:
  * 
@@ -27,6 +25,7 @@
 date   refnum    version who description
 070213 c25514    920101  ahn one way services
 070215 c25552    920101  ahn import, set default soapencoding.xsd location
+120907 b29663    E110    ahn better error reporting
 date   refnum    version who description
 *******************************************************************************/
 
@@ -45,7 +44,7 @@ date   refnum    version who description
 #include <xercesc/dom/DOMNodeList.hpp>
 #include <xercesc/dom/DOMNamedNodeMap.hpp>
 #include <xercesc/dom/DOMAttr.hpp>
-#include <xercesc/internal/XMLGrammarPoolImpl.hpp>
+#include <xercesc/framework/XMLGrammarPoolImpl.hpp>
 #include <xercesc/sax/InputSource.hpp>
 #include <xercesc/framework/psvi/XSModel.hpp>
 #include <xercesc/validators/schema/SchemaGrammar.hpp>
@@ -88,6 +87,7 @@ WsdlReader::WsdlReader(const WsdlReader& aReader)
     , isePtr(aReader.isePtr)
 	, usingCURL(aReader.usingCURL)  //@rev10
 	, fMemoryManager(aReader.fMemoryManager)
+    , errPtr(aReader.errPtr)
 {
 	initParser();
 }
@@ -104,6 +104,7 @@ WsdlReader::WsdlReader(MemoryManager* fMM)
 	, fMemoryManager(fMM)
 {
 	initParser();
+    errPtr = (WsdlErrorHandlerPtr) new WsdlErrorHandler();
 }
 
 void WsdlReader::initParser() 
@@ -114,7 +115,8 @@ void WsdlReader::initParser()
     bool                 schemaFullChecking = false;
 
     // Instantiate the DOM parser.
-    parser = new (fMemoryManager)XercesDOMParser(0, fMemoryManager, 0);
+    // parser = new (fMemoryManager)XercesDOMParser(0, fMemoryManager, 0);
+    parser = new (fMemoryManager)WsdlDOMParser(0, fMemoryManager, 0);
     parser->setValidationScheme(valScheme);
 
     parser->setDoNamespaces(doNamespaces);
@@ -126,6 +128,7 @@ void WsdlReader::initParser()
 WsdlReader::~WsdlReader()
 {
 	delete parser;
+    errPtr.release();
 }
 
 XMLChString WsdlReader::getSOAPEncBaseURI() const
@@ -165,13 +168,12 @@ DOMDocument* WsdlReader::getDocument(XMLChString docURI)
 	throw(WSDLException)
 {
     std::string lErrorMsg;    
-    // And create our error handler and install it
-    WsdlErrorHandler errorHandler;
-    parser->setErrorHandler(&errorHandler);
+    parser->setErrorHandler((ErrorHandler* const)errPtr.get());
 
-   const XMLCh* xmlFile = docURI.c_str();
+    const XMLCh* xmlFile = docURI.c_str();
     
     bool errorOccurred = false;
+    bool URIIncluded = false;
 
     DOMDocument* doc;
 
@@ -236,34 +238,58 @@ DOMDocument* WsdlReader::getDocument(XMLChString docURI)
     }
     catch (...)
     {
-	lErrorMsg = "Unexpected error during parsing.";
+	    lErrorMsg = "Unexpected error during parsing.";
+
+        // @b29663 because it is an exception we treat it as a real error
+        if (errPtr->getSawErrors())
+            lErrorMsg += errPtr->getMessage();
+
         if ( verbose )
         {
             cerr << "\nUnexpected exception during parsing: '" << xmlFile << "'" << endl;
         }
         errorOccurred = true;
     }
-    
-    
-    
-    //
-    //  Extract the DOM tree, get the list of all the elements and report the
-    //  length as the count of elements.
-    //
-    if (errorHandler.getSawErrors())
+
+    // @b29663 detect real errors and throw an exception
+    // otherwise allow the caller to decide what to do with warnings
+    if (errPtr->getSawErrors())
     {
-	lErrorMsg = "Errors occurred, no output available.";
-        if ( verbose )
+        lErrorMsg = errPtr->getMessage();
+        XMLExcepts::Codes errCode = errPtr->getErrorCode();
+
+        // @28519
+        if ((errCode >= XMLExcepts::NetAcc_InternalError && errCode <= XMLExcepts::NetAcc_UnsupportedMethod) || errCode == XMLExcepts::File_CouldNotOpenFile)
         {
-            cout << "\nErrors occurred, no output available\n" << endl;
+            throw WSDLException(WSDLException::ACCESS_ERROR,
+                              lErrorMsg);
         }
-        errorOccurred = true;
+
+        if ( lErrorMsg.length() == 0 ) 
+        {
+            lErrorMsg = "Errors occurred, no output available.";
+            errorOccurred = true;
+        }
+
+        // @b29663
+        if (errPtr->getErrorType() == WsdlErrorHandler::ErrType_Fatal)
+        {
+            URIIncluded = true;                     // the message will include the WSDL URI already
+            errorOccurred = true;
+        }
     }
     
     if (errorOccurred)
     {
+        std::string lmsg = "Problem parsing ";
+
+        if (!URIIncluded)
+            lmsg += "'" + docURI.toLocal() + "': ";
+        else
+            lmsg += ": ";
+
         throw WSDLException(WSDLException::PARSER_ERROR,
-                              string("Problem parsing '") + docURI.toLocal() + "':" + lErrorMsg);
+                              lmsg + lErrorMsg);
     }
 
     return doc;
@@ -425,8 +451,17 @@ DefinitionsPtr WsdlReader::parseDefinitions(
             def->setTypes(createXMLSchemaTypes(defEl, def));
         }
     }
+    
+    // @b29663
+    if (errPtr->getSawErrors() && errPtr->getErrorType() == WsdlErrorHandler::ErrType_Fatal)
+    {
+        std::string lmsg = "Problem parsing : ";
 
-	return def;
+        lmsg += errPtr->getMessage();
+        throw WSDLException(WSDLException::PARSER_ERROR, lmsg);
+    }
+
+    return def;
 }
 
 ImportPtr WsdlReader::parseImport(DOMElement* importEl,
@@ -680,7 +715,7 @@ TypesPtr WsdlReader::parseTypes(DOMElement* typesEl, DefinitionsPtr def)
     catch  (XMLErrs::Codes eCode)
     {
 	std::stringstream l_str;
-	l_str << "XML Parser Exception" << (int)eCode;
+	l_str << errPtr->getMessage() << "\nXML Parser Exception" << (int)eCode;
 	throw WSDLException(WSDLException::PARSER_ERROR , l_str.str().c_str());
     }
     return types;
@@ -701,6 +736,9 @@ void WsdlReader::scanSchemas(TypesPtr types)
 	scanner.setUsingCURL(usingCURL); //@rev10
     scanner.setURIStringPool(grammarResolver.getStringPool());
 	scanner.setGenerateSyntheticAnnotations(true);
+
+    // @b29663 our WsdlErrorHandler also implements the XMLErrorReporter methods
+    scanner.setErrorReporter((XMLErrorReporter* const)errPtr.get());
     
     scanner.scanExtElementList(types->getExtensibilityElements());
     

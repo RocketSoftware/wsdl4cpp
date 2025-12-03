@@ -1,10 +1,14 @@
 /*
- * %fv:XercesUtils.cpp-8 % 
- * 
  * Written by Ming Zhu, March 2006
+ *
+ * (c) 2025 Rocket Software, Inc. or its affiliates
  * 
+ * WSDL4CPP is under the Eclipse Public License version 2.0 (EPL2.0).
+ * It is a C++ translation of WSDL4J (an open source toolkit, see
+ * "http://sourceforge.net/projects/wsdl4j").
+ *
  * History:
- * 
+ *
  * revision  date    refnum    version  who  description
  * --------------------------------------------------------------------------
  * 01        060713            9.SOAP   mzu  Migrated from WSDL4J
@@ -12,8 +16,14 @@
  * 03        070213  cr25551   9.SOAP   mzu  Integrate libcurl
  * --------------------------------------------------------------------------
  * revision  date    refnum    version  who  description
- * 
+ *
  */
+/*******************************************************************************
+date   refnum    version who description
+120907 b29663    E110    ahn better error reporting
+date   refnum    version who description
+*******************************************************************************/
+
 #include "wsdl/wsdlxerces.hpp"
 
 #include <iostream>
@@ -23,9 +33,9 @@
 #include <xercesc/dom/DOMAttr.hpp>
 #include <xercesc/dom/DOMImplementationLS.hpp>
 #include <xercesc/dom/DOMImplementationRegistry.hpp>
-#include <xercesc/dom/DOMInputSource.hpp>
+//#include <xercesc/dom/DOMInputSource.hpp>
 #include <xercesc/framework/LocalFileInputSource.hpp>
-#include <xercesc/internal/XMLGrammarPoolImpl.hpp>
+#include <xercesc/framework/XMLGrammarPoolImpl.hpp>
 #include <xercesc/parsers/AbstractDOMParser.hpp>
 #include <xercesc/parsers/SAX2XMLReaderImpl.hpp>
 #include <xercesc/util/OutOfMemoryException.hpp>
@@ -55,7 +65,7 @@ WSDL_NAMESPACE_BEGIN
 
 XMLChString normalizeURL(XMLChString uri, MemoryManager* const manager)
 {
-//    //Normalize sysId 
+//    //Normalize sysId
 //    XMLBuffer normalizedSysId(1023, fMemoryManager);
 //    XMLString::removeChar(uri.c_str(), 0xFFFF, normalizedSysId);
 //    const XMLCh* normalizedURI = normalizedSysId.getRawBuffer();
@@ -87,7 +97,7 @@ InputSource* XercesUtils::createInputSource(const XMLCh* const        sysId
             srcToFill = new (manager) LocalFileInputSource( sysId, manager );
         }
         else
-            ThrowXMLwithMemMgr(MalformedURLException, XMLExcepts::URL_MalformedURL, manager);            
+            ThrowXMLwithMemMgr(MalformedURLException, XMLExcepts::URL_MalformedURL, manager);
     }
     else
     {
@@ -101,7 +111,7 @@ InputSource* XercesUtils::createInputSource(const XMLCh* const        sysId
 #endif
 		//isb->createInputSource(
 			//baseuri, normalizedURI);
-				
+
     }
     return srcToFill;
 
@@ -117,7 +127,7 @@ DOMElement* XercesUtils::getFirstChildElement (DOMElement* elem)
     return 0;
 }
 
-DOMBuilder* XercesUtils::createDOMBuilder (XMLGrammarPool* const gramPool)
+DOMLSParser* XercesUtils::createLSParser (XMLGrammarPool* const gramPool)
 {
     AbstractDOMParser::ValSchemes valScheme = AbstractDOMParser::Val_Auto;
     bool                 doNamespaces       = true;
@@ -126,38 +136,33 @@ DOMBuilder* XercesUtils::createDOMBuilder (XMLGrammarPool* const gramPool)
 
     // Instantiate the DOM parser.
     static const XMLCh gLS[] = { chLatin_L, chLatin_S, chNull };
-    
+
     DOMImplementation* impl = DOMImplementationRegistry::getDOMImplementation(gLS);
-    DOMBuilder* parser =
-            ((DOMImplementationLS*)impl)->createDOMBuilder(
+    DOMLSParser* parser =
+            ((DOMImplementationLS*)impl)->createLSParser(
                     DOMImplementationLS::MODE_SYNCHRONOUS, 0, XMLPlatformUtils::fgMemoryManager, gramPool)
         ;
-    
-//    try {
-//    } catch (std::exception& e) {
-//      std::cerr << e.what();
-//      return 1;
-//  }
 
-    parser->setFeature(XMLUni::fgDOMNamespaces, doNamespaces);
-    parser->setFeature(XMLUni::fgXercesSchema, doSchema);
-    parser->setFeature(XMLUni::fgXercesSchemaFullChecking, schemaFullChecking);
+	DOMConfiguration *config = parser->getDomConfig();
+    config->setParameter(XMLUni::fgDOMNamespaces, doNamespaces);
+    config->setParameter(XMLUni::fgXercesSchema, doSchema);
+    config->setParameter(XMLUni::fgXercesSchemaFullChecking, schemaFullChecking);
 
     if (valScheme == AbstractDOMParser::Val_Auto)
     {
-        parser->setFeature(XMLUni::fgDOMValidateIfSchema, true);
+        config->setParameter(XMLUni::fgDOMValidateIfSchema, true);
     }
     else if (valScheme == AbstractDOMParser::Val_Never)
     {
-        parser->setFeature(XMLUni::fgDOMValidation, false);
+        config->setParameter(XMLUni::fgDOMValidate, false);
     }
     else if (valScheme == AbstractDOMParser::Val_Always)
     {
-        parser->setFeature(XMLUni::fgDOMValidation, true);
+        config->setParameter(XMLUni::fgDOMValidate, true);
     }
 
     // enable datatype normalization - default is off
-    parser->setFeature(XMLUni::fgDOMDatatypeNormalization, true);
+    config->setParameter(XMLUni::fgDOMDatatypeNormalization, true);
 
     return parser;
 }
@@ -181,11 +186,11 @@ WsdlXMLScanner::~WsdlXMLScanner() {
 TraverseSchema* WsdlXMLScanner::getTraverseSchema() {
 	return traverseSchema;
 }
-          
-Grammar* WsdlXMLScanner::loadGrammar(const XMLCh* systemId, DOMElement* schemaElement, bool toCache) 
+
+Grammar* WsdlXMLScanner::loadGrammar(const XMLCh* systemId, DOMElement* schemaElement, bool toCache)
 {
     try {
-	
+
         SchemaGrammar* grammar = new (fGrammarPoolMemoryManager) SchemaGrammar(fGrammarPoolMemoryManager);
         XMLSchemaDescription* gramDesc = (XMLSchemaDescription*) grammar->getGrammarDescription();
         gramDesc->setContextType(XMLSchemaDescription::CONTEXT_PREPARSE);
@@ -207,11 +212,14 @@ Grammar* WsdlXMLScanner::loadGrammar(const XMLCh* systemId, DOMElement* schemaEl
             , fURIStringPool
             , (SchemaGrammar*) grammar
             , fGrammarResolver
+			, fCachedSchemaInfoList         // cachedSchemaInfoList
+			, fSchemaInfoList               // schemaInfoList
             , this
             , systemId
             , fEntityHandler
             , fErrorReporter
             , fMemoryManager
+			, false            // multipleImport
             , (schemaElement == 0) //@rev02
 			, cisBuilder //@rev03
         );
@@ -222,11 +230,14 @@ Grammar* WsdlXMLScanner::loadGrammar(const XMLCh* systemId, DOMElement* schemaEl
             , fURIStringPool
             , (SchemaGrammar*) grammar
             , fGrammarResolver
+			, fCachedSchemaInfoList         // cachedSchemaInfoList
+			, fSchemaInfoList               // schemaInfoList
             , this
             , systemId
             , fEntityHandler
             , fErrorReporter
             , fMemoryManager
+			, false
         );
 #endif
 
@@ -237,14 +248,14 @@ Grammar* WsdlXMLScanner::loadGrammar(const XMLCh* systemId, DOMElement* schemaEl
 	            fValidator->setGrammar(grammar);
 	            fValidator->preContentValidation(false, true);
 	        }
-	
+
 	        if (toCache) {
 	            fGrammarResolver->cacheGrammars();
 	        }
-	
+
 	        if(getPSVIHandler())
 	            fModel = fGrammarResolver->getXSModel();
-	            
+
         }
 
         return grammar;
@@ -253,10 +264,10 @@ Grammar* WsdlXMLScanner::loadGrammar(const XMLCh* systemId, DOMElement* schemaEl
 	}
 }
 
-Grammar*  WsdlXMLScanner::afterLoadGrammar(Grammar* grammar, bool toCache) 
+Grammar*  WsdlXMLScanner::afterLoadGrammar(Grammar* grammar, bool toCache)
 {
     try {
-	
+
         if (fValidate) {
             //  validate the Schema scan so far
             fValidator->setGrammar(grammar);
@@ -277,7 +288,7 @@ Grammar*  WsdlXMLScanner::afterLoadGrammar(Grammar* grammar, bool toCache)
 }
 
 //@rev02
-void WsdlXMLScanner::traverseExtElementList(ExtensibilityElement::ListPtr extElements) 
+void WsdlXMLScanner::traverseExtElementList(ExtensibilityElement::ListPtr extElements)
 {
 #ifdef WSDL_USE_CURL
     wsdl::QName::PtrSet::iterator itEnd = (SchemaConstants::XSD_QNAME_LIST)->end();
@@ -296,10 +307,10 @@ void WsdlXMLScanner::traverseExtElementList(ExtensibilityElement::ListPtr extEle
 #endif
             getTraverseSchema()->preprocessOnlineSchema(schema->getElement(),
                 schema->getDocumentBaseURI());
-                
+
         }
     }
-    
+
     for(i = extElements->begin(), l = extElements->end();
         i != l; i++)
     {
@@ -314,7 +325,7 @@ void WsdlXMLScanner::traverseExtElementList(ExtensibilityElement::ListPtr extEle
 #endif
 }
 
-void WsdlXMLScanner::scanExtElementList(ExtensibilityElement::ListPtr extElements) 
+void WsdlXMLScanner::scanExtElementList(ExtensibilityElement::ListPtr extElements)
 {
 	Grammar* grammar;
 #ifdef WSDL_USE_CURL
@@ -343,5 +354,30 @@ void WsdlXMLScanner::scanExtElementList(ExtensibilityElement::ListPtr extElement
 	}
 #endif
 }
+
+// @b29663
+WsdlDOMParser::WsdlDOMParser( XMLValidator* const   valToAdopt
+                                , MemoryManager* const  manager
+                                , XMLGrammarPool* const gramPool):
+XercesDOMParser(valToAdopt, manager, gramPool)
+{
+}
+
+WsdlDOMParser::~WsdlDOMParser()
+{
+}
+
+DOMElement* WsdlDOMParser::createElementNS(
+		const XMLCh *namespaceURI, const XMLCh *elemPrefix, const XMLCh *localName, const XMLCh *qName)
+{
+    ReaderMgr::LastExtEntityInfo lastInfo;
+    ((ReaderMgr*) fScanner->getLocator())->getLastExtEntityInfo(lastInfo);
+
+    return getDocument()->createElementNS(namespaceURI, qName,
+                                          lastInfo.lineNumber, lastInfo.colNumber);
+
+}
+
+
 
 WSDL_NAMESPACE_END
