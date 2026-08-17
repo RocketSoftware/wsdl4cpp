@@ -1,8 +1,13 @@
 # Change log - WSDL4CPP
 
-Current release 1.0.0
+Current release 1.0.1
 
 
+## Release 1.0.1
+
+### What's new?:
+- Fixed bugs in wsdltest.
+  
 ## Release 1.0.0
   
 ### What's new?:
